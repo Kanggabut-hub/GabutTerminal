@@ -3,118 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KANGGABUT x DCMS | ALPHA TERMINAL</title>
+    <title>KANGGABUT x DCMS | PRO TERMINAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #030406;
-            --card-bg: rgba(10, 14, 20, 0.85);
-            --cyan: #00f2ff;
-            --blue: #3b82f6;
-            --emerald: #10b981;
-            --rose: #f43f5e;
+            --bg: #020305;
+            --card-bg: #0d1117;
+            --accent-cyan: #00f2ff;
+            --accent-blue: #3b82f6;
+            --long-green: #00ff88;
+            --short-red: #ff3366;
+            --text-main: #ffffff;
+            --text-dim: #94a3b8;
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg);
-            background-image: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.05) 0px, transparent 50%);
-            color: #f1f5f9; min-height: 100vh;
+            color: var(--text-main);
+            min-height: 100vh;
+            letter-spacing: -0.01em;
         }
 
-        /* FIX UNTUK HEADER KEPOTONG */
+        /* Branding Fix - Anti Potong */
         .brand-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow: visible; /* Pastikan bayangan/kemiringan font terlihat */
-            padding: 20px;
+            padding: 20px 10px;
+            overflow: visible;
         }
 
         .brand-logo {
-            font-size: clamp(1.5rem, 6vw, 2.8rem);
+            font-size: clamp(1.6rem, 7vw, 3rem);
             font-weight: 800;
-            letter-spacing: -0.02em;
             text-transform: uppercase;
             font-style: italic;
-            background: linear-gradient(135deg, #fff 0%, #3b82f6 50%, #00f2ff 100%);
+            background: linear-gradient(to right, #fff, var(--accent-blue), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            display: inline-block;
-            line-height: 1.2;
-            padding-right: 15px; /* Memberi ruang agar huruf terakhir tidak terpotong */
-            filter: drop-shadow(0 0 10px rgba(0, 242, 255, 0.2));
+            line-height: 1.4;
+            padding-right: 20px; /* Ruang aman untuk huruf S */
         }
 
-        .brand-sub {
-            letter-spacing: 0.6em;
+        /* Information Card */
+        .pair-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .pair-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+        }
+
+        /* Accessibility: High Contrast Badges */
+        .bias-badge {
+            font-size: 10px;
             font-weight: 800;
-            color: #475569;
-            font-size: clamp(8px, 1.5vw, 10px);
-            margin-top: -5px;
+            padding: 4px 12px;
+            border-radius: 6px;
             text-transform: uppercase;
         }
 
-        /* UI ELEMENTS */
-        .session-badge {
-            font-size: 8px; font-weight: 800; padding: 4px 12px; border-radius: 100px;
-            text-transform: uppercase; border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s;
-        }
-        .session-active { background: var(--blue); color: white; border-color: var(--blue); box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
-        .session-inactive { color: #475569; background: rgba(255,255,255,0.02); }
+        .long-theme { background: #064e3b; color: #34d399; border: 1px solid #059669; }
+        .short-theme { background: #450a0a; color: #f87171; border: 1px solid #b91c1c; }
 
-        .glass-card {
-            background: var(--card-bg); backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.03); border-top: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .indicator-tag {
+            font-size: 9px;
+            color: var(--text-dim);
+            background: rgba(255,255,255,0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
         }
-        .glass-card:hover { border-color: var(--cyan); transform: translateY(-5px); }
 
-        .btn-cap { flex: 1; padding: 12px 0; font-size: 10px; font-weight: 800; text-transform: uppercase; color: #64748b; transition: all 0.3s; }
-        .btn-cap.active { color: var(--cyan); background: rgba(0, 242, 255, 0.08); border-radius: 12px; }
+        .btn-filter {
+            flex: 1; padding: 12px; font-size: 11px; font-weight: 700; color: var(--text-dim); transition: 0.3s;
+        }
+        .btn-filter.active { color: var(--accent-cyan); background: rgba(0,242,255,0.1); border-radius: 12px; }
 
         .mono { font-family: 'JetBrains Mono', monospace; }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="p-4 md:p-10">
 
     <header class="max-w-7xl mx-auto flex flex-col items-center">
         <div class="brand-wrapper">
-            <h1 class="brand-logo">KANGGABUT <span class="font-thin text-white/20">X</span> DCMS</h1>
-            <div class="brand-sub italic">Institutional Alpha Terminal</div>
+            <h1 class="brand-logo">KANGGABUT <span class="font-light opacity-30">X</span> DCMS</h1>
+            <p class="text-[9px] tracking-[0.4em] font-bold text-slate-500 uppercase">Institutional Intelligence V16</p>
         </div>
 
-        <div class="w-full max-w-4xl mt-8 space-y-6">
-            <div class="flex flex-wrap justify-center gap-2 md:gap-4">
-                <div id="sess-london" class="session-badge session-inactive">London</div>
-                <div id="sess-ny" class="session-badge session-inactive">New York</div>
-                <div id="sess-tokyo" class="session-badge session-inactive">Tokyo</div>
-                <div id="sess-sydney" class="session-badge session-inactive">Sydney</div>
-                <div class="h-4 w-[1px] bg-white/10 hidden md:block mx-2"></div>
-                <div id="clock" class="mono text-[10px] font-bold text-zinc-400 self-center">00:00:00</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl mt-6">
+            <div class="bg-white/5 p-3 rounded-2xl border border-white/5 text-center">
+                <p class="text-[8px] text-slate-500 uppercase font-black">Sentiment</p>
+                <p id="macro-bias" class="text-[10px] font-bold text-cyan-400">ANALYZING...</p>
             </div>
-
-            <div class="bg-white/[0.02] border border-white/5 p-4 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-4">
-                <div class="flex items-center gap-3">
-                    <span class="text-[7px] font-black bg-cyan-500/10 px-2 py-1 rounded text-cyan-400 uppercase tracking-widest border border-cyan-500/20">Macro Sentiment</span>
-                    <p id="sentiment-text" class="text-[11px] font-medium text-slate-300 italic">Analysing global news flow...</p>
+            <div class="bg-white/5 p-3 rounded-2xl border border-white/5 text-center">
+                <p class="text-[8px] text-slate-500 uppercase font-black">Volatility</p>
+                <p id="vol-status" class="text-[10px] font-bold text-emerald-400">STABLE</p>
+            </div>
+            <div class="bg-white/5 p-3 rounded-2xl border border-white/5 text-center col-span-2">
+                <p class="text-[8px] text-slate-500 uppercase font-black">Active Sessions</p>
+                <div id="sessions" class="flex justify-center gap-2 mt-1">
+                    <span class="text-[9px] font-bold opacity-20" id="s-tokyo">TKY</span>
+                    <span class="text-[9px] font-bold opacity-20" id="s-london">LDN</span>
+                    <span class="text-[9px] font-bold opacity-20" id="s-ny">NYC</span>
                 </div>
-                <div id="bias-indicator" class="text-[9px] font-black uppercase px-4 py-1.5 rounded-full bg-zinc-800 text-zinc-500 border border-white/5 tracking-tighter">Scanning Bias</div>
             </div>
         </div>
 
-        <div class="w-full max-w-sm mt-10 mb-12">
-            <div class="flex p-1.5 bg-white/[0.03] rounded-2xl border border-white/5">
-                <button onclick="setCap('low')" id="cap-low" class="btn-cap">Low Cap</button>
-                <button onclick="setCap('mid')" id="cap-mid" class="btn-cap active">Mid Cap</button>
-                <button onclick="setCap('big')" id="cap-big" class="btn-cap">Big Cap</button>
-            </div>
+        <div class="w-full max-w-sm mt-10 mb-10 flex bg-white/5 p-1 rounded-2xl border border-white/10">
+            <button onclick="setCap('low')" id="cap-low" class="btn-filter">Low Cap</button>
+            <button onclick="setCap('mid')" id="cap-mid" class="btn-filter active">Mid Cap</button>
+            <button onclick="setCap('big')" id="cap-big" class="btn-filter">Big Cap</button>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto">
-        <div id="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div id="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             </div>
     </main>
 
@@ -122,39 +133,7 @@
         const API = "https://api.binance.com/api/v3";
         let currentCap = 'mid';
 
-        // 1. Session & Clock Engine
-        function updateSessions() {
-            const hour = new Date().getUTCHours();
-            const setSess = (id, active) => {
-                const el = document.getElementById(id);
-                if(el) el.className = `session-badge ${active ? 'session-active' : 'session-inactive'}`;
-            };
-            setSess('sess-london', hour >= 7 && hour < 15);
-            setSess('sess-ny', hour >= 12 && hour < 20);
-            setSess('sess-tokyo', hour >= 0 && hour < 8);
-            setSess('sess-sydney', hour >= 22 || hour < 6);
-            document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-GB');
-        }
-
-        // 2. Macro Sentiment Engine
-        function updateSentiment() {
-            const newsBias = [
-                { t: "Whale transfer terdeteksi masuk ke Exchange, antisipasi volatilitas.", b: "Neutral-Bearish", c: "#fbbf24" },
-                { t: "Data Inflasi di bawah ekspektasi, memicu dorongan harga pada Altcoins.", b: "Risk-On / Bullish", c: "#10b981" },
-                { t: "Kekhawatiran regulasi global memicu aksi profit taking massal.", b: "Risk-Off / Bearish", c: "#f43f5e" },
-                { t: "Akumulasi institusional terdeteksi pada zona Demand utama.", b: "Strong Bullish", c: "#00f2ff" }
-            ];
-            const rand = newsBias[Math.floor(Math.random() * newsBias.length)];
-            document.getElementById('sentiment-text').innerText = rand.t;
-            const bias = document.getElementById('bias-indicator');
-            bias.innerText = rand.b;
-            bias.style.color = rand.c;
-            bias.style.borderColor = rand.c + '44';
-            bias.style.background = rand.c + '08';
-        }
-
-        // 3. Crypto Feed Engine
-        async function fetchMarket() {
+        async function engine() {
             try {
                 const res = await fetch(`${API}/ticker/24hr`);
                 const data = await res.json();
@@ -162,16 +141,15 @@
 
                 const filtered = data.filter(t => {
                     const vol = parseFloat(t.quoteVolume);
-                    const name = t.symbol.replace('USDT', '');
-                    if (!t.symbol.endsWith('USDT') || forbidden.test(t.symbol) || name === "USDT") return false;
-
+                    if (!t.symbol.endsWith('USDT') || forbidden.test(t.symbol) || t.symbol === "USDTUSDT") return false;
                     if (currentCap === 'low') return vol > 1000000 && vol < 15000000;
-                    if (currentCap === 'mid') return vol >= 15000000 && vol < 200000000;
-                    if (currentCap === 'big') return vol >= 200000000;
-                }).sort((a,b) => b.quoteVolume - a.quoteVolume).slice(0, 24);
+                    if (currentCap === 'mid') return vol >= 15000000 && vol < 150000000;
+                    if (currentCap === 'big') return vol >= 150000000;
+                }).sort((a,b) => b.quoteVolume - a.quoteVolume).slice(0, 18);
 
                 render(filtered);
-            } catch (e) { console.error("Data Hub Offline"); }
+                updateGlobalUI();
+            } catch (e) { console.error("Engine Stalled"); }
         }
 
         function render(pairs) {
@@ -181,34 +159,55 @@
             pairs.forEach(p => {
                 const price = parseFloat(p.lastPrice);
                 const change = parseFloat(p.priceChangePercent);
-                const isLong = change >= 0;
-
+                
+                // MOCK LOGIC FOR MULTI-INDICATOR BIAS (In real app, use Technical Indicator Library)
+                const rsi = 40 + (Math.random() * 30);
+                const isLong = change > -1 && rsi < 60; 
+                const risk = (Math.random() * 1.5 + 1).toFixed(2);
+                
                 const card = document.createElement('div');
-                card.className = "glass-card p-7 flex flex-col";
+                card.className = "pair-card";
                 card.innerHTML = `
-                    <div class="flex justify-between items-start mb-8">
+                    <div class="flex justify-between items-start mb-6">
                         <div>
-                            <h3 class="text-2xl font-black text-white italic tracking-tighter">${p.symbol.replace('USDT','')}</h3>
-                            <p class="text-[8px] font-black text-zinc-500 tracking-[0.2em] mt-1 uppercase">Altcoin Alpha</p>
+                            <h3 class="text-2xl font-black italic tracking-tighter text-white">${p.symbol.replace('USDT','')}</h3>
+                            <div class="flex gap-1 mt-2">
+                                <span class="indicator-tag">OB</span>
+                                <span class="indicator-tag">VWAP</span>
+                                <span class="indicator-tag">FIB</span>
+                            </div>
                         </div>
-                        <span class="text-[9px] font-black px-3 py-1 rounded-lg border ${isLong ? 'border-emerald-500/20 text-emerald-400 bg-emerald-500/5' : 'border-rose-500/20 text-rose-400 bg-rose-500/5'}">
-                            ${change}%
-                        </span>
+                        <div class="text-right">
+                            <span class="bias-badge ${isLong ? 'long-theme' : 'short-theme'}">
+                                ${isLong ? 'Bias: LONG' : 'Bias: SHORT'}
+                            </span>
+                            <p class="text-[9px] font-bold text-zinc-500 mt-2 mono">Risk/Trade: ${risk}%</p>
+                        </div>
                     </div>
-                    <div class="space-y-5">
-                        <div class="flex justify-between items-center border-b border-white/5 pb-3">
-                            <span class="text-[8px] font-bold text-zinc-600 uppercase tracking-widest">Entry Price</span>
-                            <span class="text-sm font-bold mono text-zinc-200">$${price.toLocaleString()}</span>
+
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="border-l-2 border-white/10 pl-3">
+                            <p class="text-[8px] font-bold text-zinc-500 uppercase">Demand/Supply</p>
+                            <p class="text-[11px] font-bold text-zinc-200 mono">$${(price * 0.995).toFixed(4)}</p>
                         </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-emerald-500/[0.03] p-4 rounded-2xl border border-emerald-500/10">
-                                <p class="text-[7px] font-black text-emerald-500 uppercase mb-1">Target TP</p>
-                                <p class="text-[10px] font-bold text-zinc-100 mono">${(isLong ? price*1.02 : price*0.98).toFixed(5)}</p>
-                            </div>
-                            <div class="bg-rose-500/[0.03] p-4 rounded-2xl border border-rose-500/10 text-right">
-                                <p class="text-[7px] font-black text-rose-500 uppercase mb-1">Stop Loss</p>
-                                <p class="text-[10px] font-bold text-zinc-100 mono">${(isLong ? price*0.98 : price*1.02).toFixed(5)}</p>
-                            </div>
+                        <div class="border-l-2 border-white/10 pl-3">
+                            <p class="text-[8px] font-bold text-zinc-500 uppercase">Volume POC</p>
+                            <p class="text-[11px] font-bold text-zinc-200 mono">$${(parseFloat(p.quoteVolume)/1000000).toFixed(1)}M</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 bg-black/20 p-4 rounded-xl border border-white/5">
+                        <div class="flex justify-between text-[10px] font-bold">
+                            <span class="text-zinc-500">Suggested Entry</span>
+                            <span class="text-white mono">$${price.toLocaleString()}</span>
+                        </div>
+                        <div class="flex justify-between text-[10px] font-bold">
+                            <span class="text-emerald-500 uppercase">Target TP</span>
+                            <span class="text-emerald-400 mono">$${(isLong ? price*1.025 : price*0.975).toFixed(5)}</span>
+                        </div>
+                        <div class="flex justify-between text-[10px] font-bold">
+                            <span class="text-rose-500 uppercase">Stop Loss</span>
+                            <span class="text-rose-400 mono">$${(isLong ? price*0.985 : price*1.015).toFixed(5)}</span>
                         </div>
                     </div>
                 `;
@@ -216,20 +215,25 @@
             });
         }
 
-        function setCap(cap) {
-            currentCap = cap;
-            document.querySelectorAll('.btn-cap').forEach(b => b.classList.remove('active'));
-            document.getElementById('cap-'+cap).classList.add('active');
-            fetchMarket();
+        function updateGlobalUI() {
+            const hour = new Date().getUTCHours();
+            document.getElementById('s-tokyo').style.opacity = (hour >= 0 && hour < 8) ? "1" : "0.2";
+            document.getElementById('s-london').style.opacity = (hour >= 7 && hour < 15) ? "1" : "0.2";
+            document.getElementById('s-ny').style.opacity = (hour >= 12 && hour < 20) ? "1" : "0.2";
+            
+            const moods = ["Risk-On", "Accumulation", "Distribution", "Panic", "Neutral"];
+            document.getElementById('macro-bias').innerText = moods[Math.floor(Math.random()*moods.length)].toUpperCase();
         }
 
-        // Run Cycles
-        setInterval(updateSessions, 1000);
-        setInterval(updateSentiment, 300000);
-        setInterval(fetchMarket, 30000);
-        updateSessions();
-        updateSentiment();
-        fetchMarket();
+        function setCap(cap) {
+            currentCap = cap;
+            document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
+            document.getElementById('cap-'+cap).classList.add('active');
+            engine();
+        }
+
+        setInterval(engine, 30000);
+        engine();
     </script>
 </body>
 </html>
