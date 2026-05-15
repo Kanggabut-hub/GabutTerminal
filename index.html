@@ -2,194 +2,231 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KANGGABUT TERMINAL | PRO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KANGGABUT TERMINAL | ULTRA</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --cyan: #00f2ff;
+            --blue: #0066ff;
+            --pink: #ff007a;
+            --white: #ffffff;
+            --black: #050505;
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: #020202;
-            color: #fff;
-            min-height: 100vh;
+            background-color: var(--black);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(0, 242, 255, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(255, 0, 122, 0.05) 0px, transparent 50%);
+            color: var(--white);
+            margin: 0;
+            overflow-x: hidden;
         }
-        .glass-card {
+
+        /* 3D Glass Card dengan Border Tipis */
+        .card-3d {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 28px;
-            transition: all 0.3s ease;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.02);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .glass-card:hover {
-            border-color: #00ffcc;
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.05);
+
+        .card-3d:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--cyan);
+            box-shadow: 0 20px 40px rgba(0, 242, 255, 0.1);
         }
+
+        .signal-badge {
+            font-size: 9px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid currentColor;
+        }
+
+        .long-glow { color: var(--cyan); text-shadow: 0 0 10px rgba(0, 242, 255, 0.5); }
+        .short-glow { color: var(--pink); text-shadow: 0 0 10px rgba(255, 0, 122, 0.5); }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--black); }
+        ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 10px; }
+
         .mono { font-family: 'JetBrains Mono', monospace; }
-        .neon-text { text-shadow: 0 0 20px rgba(0, 255, 204, 0.3); }
-        .gradient-text {
-            background: linear-gradient(90deg, #00ffcc, #0099ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="pb-24 lg:pb-12">
 
-    <header class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
-        <div class="text-center md:text-left">
-            <h1 class="text-4xl font-extrabold tracking-tighter neon-text">KANGGABUT<span class="text-zinc-600 font-light italic">TERMINAL</span></h1>
-            <p class="text-[11px] uppercase tracking-[0.5em] gradient-text font-bold mt-1">Kegabutan Sumber Cuan</p>
-        </div>
-        <div class="glass-card px-6 py-3 flex gap-8 items-center border-white/5">
-            <div class="text-center">
-                <p class="text-[9px] text-zinc-500 uppercase font-bold">Signal Node</p>
-                <p class="text-xs font-bold text-emerald-400">BINANCE_LIVE</p>
+    <nav class="sticky top-0 z-50 bg-black/60 backdrop-blur-xl border-b border-white/5 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex flex-col">
+                <h1 class="text-xl md:text-2xl font-extrabold tracking-tighter italic">
+                    KANGGABUT<span class="text-blue-500">TERMINAL</span>
+                </h1>
+                <p class="text-[9px] md:text-[10px] tracking-[0.3em] font-bold text-zinc-400 uppercase">
+                    Kegabutan <span class="text-pink-500">Sumber</span> <span class="text-cyan-400">Cuan</span>
+                </p>
             </div>
-            <div class="w-px h-8 bg-white/10"></div>
-            <div class="text-center font-mono">
-                <p class="text-[9px] text-zinc-500 uppercase font-bold text-right">Refresh_In</p>
-                <p id="timer" class="text-xs text-white text-right">60s</p>
+            <div class="hidden md:flex gap-6 items-center">
+                <div class="text-right">
+                    <p class="text-[9px] text-zinc-500 font-bold uppercase">Market Engine</p>
+                    <p class="text-xs font-bold text-cyan-400">BINANCE_DATA</p>
+                </div>
+                <div class="h-8 w-px bg-white/10"></div>
+                <p id="clock" class="text-sm font-bold mono tracking-tighter">00:00:00</p>
             </div>
-            <div class="w-px h-8 bg-white/10"></div>
-            <p id="clock" class="text-sm font-bold mono">00:00:00</p>
         </div>
-    </header>
+    </nav>
 
-    <main class="max-w-7xl mx-auto">
-        <div id="loader" class="flex flex-col items-center justify-center py-32 gap-4">
-            <div class="relative w-12 h-12">
-                <div class="absolute w-full h-full border-4 border-emerald-500/20 rounded-full"></div>
-                <div class="absolute w-full h-full border-4 border-t-emerald-500 rounded-full animate-spin"></div>
+    <main class="max-w-7xl mx-auto px-4 mt-8">
+        
+        <div class="mb-10 p-6 card-3d bg-gradient-to-r from-blue-900/10 to-transparent">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-lg font-bold">Trading Intelligence v7.0</h2>
+                    <p class="text-xs text-zinc-400">Auto-scanning Top 25 Pairs by 24h Volume.</p>
+                </div>
+                <div class="flex gap-2">
+                    <div class="bg-black/40 px-4 py-2 rounded-xl border border-white/5">
+                        <p class="text-[8px] text-zinc-500 uppercase">Refresh In</p>
+                        <p id="timer" class="text-xs font-bold text-white mono">60s</p>
+                    </div>
+                </div>
             </div>
-            <p class="text-[10px] mono text-zinc-500 tracking-[0.3em] uppercase animate-pulse">Syncing Global Market Data...</p>
         </div>
 
-        <div id="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 opacity-0 transition-opacity duration-1000">
+        <div id="loader" class="flex flex-col items-center justify-center py-20">
+            <div class="w-10 h-10 border-2 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin"></div>
+            <p class="mt-4 text-[10px] font-bold tracking-widest text-zinc-500 uppercase">Intercepting Market...</p>
+        </div>
+
+        <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             </div>
     </main>
 
+    <div class="fixed bottom-0 left-0 right-0 md:hidden bg-black/80 backdrop-blur-lg border-t border-white/5 p-4 flex justify-between items-center z-50">
+        <p id="clock-mobile" class="text-xs font-bold mono">00:00:00</p>
+        <span class="text-[8px] font-black px-3 py-1 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-full">ACTIVE</span>
+    </div>
+
     <script>
-        const BINANCE_API = "https://api.binance.com/api/v3";
-        let timeLeft = 60;
+        const API = "https://api.binance.com/api/v3";
+        let countdown = 60;
 
-        // Clock & Refresh Timer
-        setInterval(() => {
-            document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-GB');
-            timeLeft--;
-            document.getElementById('timer').innerText = timeLeft + "s";
-            if(timeLeft <= 0) {
-                timeLeft = 60;
-                fetchSignals();
-            }
-        }, 1000);
+        function updateClock() {
+            const time = new Date().toLocaleTimeString('en-GB');
+            document.getElementById('clock').innerText = time;
+            document.getElementById('clock-mobile').innerText = time;
+            countdown--;
+            document.getElementById('timer').innerText = countdown + "s";
+            if(countdown <= 0) { countdown = 60; getSignals(); }
+        }
+        setInterval(updateClock, 1000);
 
-        async function fetchSignals() {
+        async function getSignals() {
             try {
-                // Ambil ticker 24 jam untuk filter volume
-                const tickerResp = await fetch(`${BINANCE_API}/ticker/24hr`);
-                const tickers = await tickerResp.json();
-                
-                // Ambil koin USDT dengan volume tertinggi (top 20)
-                const topPairs = tickers
-                    .filter(t => t.symbol.endsWith('USDT'))
-                    .sort((a, b) => b.quoteVolume - a.quoteVolume)
-                    .slice(0, 20);
+                const res = await fetch(`${API}/ticker/24hr`);
+                const data = await res.json();
+                const pairs = data.filter(t => t.symbol.endsWith('USDT'))
+                                  .sort((a,b) => b.quoteVolume - a.quoteVolume)
+                                  .slice(0, 24);
 
-                const grid = document.getElementById('grid');
-                const loader = document.getElementById('loader');
+                const signals = await Promise.all(pairs.map(async (p) => {
+                    const cRes = await fetch(`${API}/klines?symbol=${p.symbol}&interval=1h&limit=20`);
+                    const candles = await cRes.json();
+                    return { symbol: p.symbol, price: p.lastPrice, candles: candles };
+                }));
 
-                // Ambil data candle untuk setiap koin (Parallel)
-                const signalData = await Promise.all(
-                    topPairs.map(async (p) => {
-                        const candleResp = await fetch(`${BINANCE_API}/klines?symbol=${p.symbol}&interval=1h&limit=20`);
-                        const candles = await candleResp.json();
-                        return { 
-                            symbol: p.symbol, 
-                            price: p.lastPrice, 
-                            candles: candles,
-                            vol: p.quoteVolume 
-                        };
-                    })
-                );
-
-                render(signalData);
-                loader.classList.add('hidden');
-                grid.classList.remove('opacity-0');
-
-            } catch (err) {
-                console.error("Fetch Error:", err);
-            }
+                render(signals);
+                document.getElementById('loader').classList.add('hidden');
+            } catch (e) { console.error("API Down"); }
         }
 
         function calculateRSI(candles) {
-            if (candles.length < 15) return 50;
             const closes = candles.map(c => parseFloat(c[4]));
-            let gains = 0, losses = 0;
-            for (let i = 1; i < 15; i++) {
-                let diff = closes[i] - closes[i-1];
-                if (diff >= 0) gains += diff; else losses -= diff;
+            let up = 0, down = 0;
+            for(let i=1; i<15; i++) {
+                let d = closes[i] - closes[i-1];
+                if(d >= 0) up += d; else down -= d;
             }
-            const rs = gains / (losses || 1);
-            return 100 - (100 / (1 + rs));
+            return 100 - (100 / (1 + (up / (Math.abs(down) || 1))));
         }
 
         function render(data) {
             const grid = document.getElementById('grid');
             grid.innerHTML = '';
 
-            data.forEach((item) => {
+            data.forEach(item => {
                 const rsi = calculateRSI(item.candles);
-                const price = parseFloat(item.price);
-                
-                // LOGIKA SIGNAL (Dibuat adaptif agar data selalu muncul)
-                let type = null;
-                let color = "";
-                if (rsi < 48) { type = "LONG"; color = "#10b981"; }
-                else if (rsi > 52) { type = "SHORT"; color = "#ff4d4d"; }
+                const p = parseFloat(item.price);
+                const isLong = rsi < 50;
+                const color = isLong ? 'cyan' : 'pink';
+                const type = isLong ? 'LONG' : 'SHORT';
 
-                if (type) {
-                    const card = document.createElement('div');
-                    card.className = "glass-card p-6 flex flex-col justify-between";
-                    card.innerHTML = `
-                        <div class="flex justify-between items-start mb-8">
-                            <div>
-                                <h3 class="text-2xl font-black tracking-tighter text-white uppercase">${item.symbol.replace('USDT','')}</h3>
-                                <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mt-1">Vol: $${(item.vol/1000000).toFixed(1)}M</p>
+                const card = document.createElement('div');
+                card.className = "card-3d p-6 relative overflow-hidden group";
+                card.innerHTML = `
+                    <div class="absolute -top-10 -right-10 w-24 h-24 bg-${color}-500/10 blur-[40px] group-hover:bg-${color}-500/20 transition-all"></div>
+                    
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <h3 class="text-xl font-extrabold tracking-tighter text-white">${item.symbol.replace('USDT','')}</h3>
+                            <p class="text-[10px] text-zinc-500 font-bold tracking-widest mt-1">BINANCE_FUTURES</p>
+                        </div>
+                        <span class="signal-badge text-${color}-400 border-${color}-400/30 bg-${color}-400/5">
+                            ${type}
+                        </span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-black/30 p-3 rounded-2xl border border-white/5 flex justify-between items-center">
+                            <span class="text-[9px] text-zinc-500 font-bold uppercase">Market Price</span>
+                            <span class="text-xs font-bold mono text-white italic">$${p.toLocaleString()}</span>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="bg-black/30 p-3 rounded-2xl border border-white/5">
+                                <p class="text-[8px] text-zinc-500 uppercase mb-1">Target 1</p>
+                                <p class="text-[10px] font-bold text-emerald-400 mono">${(isLong ? p*1.02 : p*0.98).toFixed(4)}</p>
                             </div>
-                            <div class="text-right">
-                                <p class="text-xs font-bold mono" style="color: ${color}">$${price.toLocaleString()}</p>
-                                <div class="flex items-center gap-2 mt-2 justify-end">
-                                    <span class="w-2 h-2 rounded-full animate-pulse" style="background: ${color}"></span>
-                                    <span class="text-[10px] font-black tracking-widest" style="color: ${color}">${type}_ENTRY</span>
-                                </div>
+                            <div class="bg-black/30 p-3 rounded-2xl border border-white/5">
+                                <p class="text-[8px] text-zinc-500 uppercase mb-1">Stop Loss</p>
+                                <p class="text-[10px] font-bold text-pink-500 mono">${(isLong ? p*0.98 : p*1.02).toFixed(4)}</p>
                             </div>
                         </div>
 
-                        <div class="space-y-4 mb-8">
-                            <div class="flex justify-between items-center text-[11px] font-mono border-b border-white/5 pb-2">
-                                <span class="text-zinc-500 uppercase">Target_Profit</span>
-                                <span class="text-emerald-400 font-bold">$${type === 'LONG' ? (price * 1.025).toFixed(5) : (price * 0.975).toFixed(5)}</span>
+                        <div class="pt-2">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-[8px] text-zinc-500 font-bold uppercase">RSI Index</span>
+                                <span class="text-[10px] font-bold ${isLong ? 'text-cyan-400' : 'text-pink-400'}">${rsi.toFixed(1)}</span>
                             </div>
-                            <div class="flex justify-between items-center text-[11px] font-mono border-b border-white/5 pb-2">
-                                <span class="text-zinc-500 uppercase">Stop_Loss</span>
-                                <span class="text-rose-500 font-bold">$${type === 'LONG' ? (price * 0.985).toFixed(5) : (price * 1.015).toFixed(5)}</span>
+                            <div class="h-[3px] w-full bg-white/5 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-blue-500 to-${color}-400 transition-all duration-1000" style="width: ${rsi}%"></div>
                             </div>
                         </div>
-
-                        <div class="flex items-center justify-between">
-                            <div class="w-2/3 h-1 bg-white/5 rounded-full overflow-hidden">
-                                <div class="h-full transition-all duration-1000" style="width: ${rsi}%; background: ${color}"></div>
-                            </div>
-                            <p class="text-[10px] mono text-zinc-500 uppercase font-bold">RSI: ${rsi.toFixed(1)}</p>
-                        </div>
-                    `;
-                    grid.appendChild(card);
-                }
+                    </div>
+                `;
+                grid.appendChild(card);
             });
         }
 
-        fetchSignals();
+        getSignals();
     </script>
 </body>
 </html>
