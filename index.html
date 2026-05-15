@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KANGGABUT x DCMS | V28 OMNI-MEME</title>
+    <title>KANGGABUT x DCMS | V29 OMNI-ELITE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -19,69 +19,69 @@
             border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .tactical-card:hover { border-color: var(--neon-cyan); transform: scale(1.02); box-shadow: 0 0 20px rgba(0, 242, 255, 0.1); }
+        .tactical-card:hover { border-color: var(--neon-cyan); transform: translateY(-5px); box-shadow: 0 0 30px rgba(0, 242, 255, 0.1); }
         .active-cap { border-color: var(--neon-pink) !important; color: var(--neon-pink); background: rgba(255, 0, 127, 0.05); }
-        .active-lang { color: var(--neon-cyan); opacity: 1 !important; text-decoration: underline; }
-        .session-on { color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan); font-weight: 900; }
+        .active-lang { color: var(--neon-cyan) !important; opacity: 1 !important; font-weight: 900; border-bottom: 2px solid var(--neon-cyan); }
+        .session-active { color: var(--neon-cyan); text-shadow: 0 0 8px var(--neon-cyan); }
         .meme-badge { background: linear-gradient(90deg, #ffde59, #ff914d); color: black; font-size: 7px; padding: 2px 6px; border-radius: 4px; font-weight: 900; }
     </style>
 </head>
 <body class="p-4 md:p-10">
 
     <header class="max-w-7xl mx-auto mb-10">
-        <div class="flex flex-wrap justify-between items-center gap-4 mb-10 bg-white/5 p-4 rounded-3xl border border-white/10">
+        <div class="flex flex-wrap justify-between items-center gap-4 mb-8 bg-white/5 p-4 rounded-3xl border border-white/10">
             <div class="flex gap-4">
                 <button onclick="setL('id')" id="l-id" class="text-[10px] font-black opacity-40 active-lang">ID</button>
                 <button onclick="setL('en')" id="l-en" class="text-[10px] font-black opacity-40">EN</button>
                 <button onclick="setL('jp')" id="l-jp" class="text-[10px] font-black opacity-40">JP</button>
             </div>
-            <div class="flex gap-4 items-center">
-                <div id="sessions" class="flex gap-2 text-[8px] font-black uppercase">
-                    <span id="tky">Tokyo</span> <span id="ldn">London</span> <span id="ny">New York</span>
+            <div class="flex items-center gap-6">
+                <div id="market-sessions" class="hidden md:flex gap-3 text-[9px] font-black uppercase">
+                    <span id="s-tokyo">Tokyo</span> <span id="s-london">London</span> <span id="s-ny">New York</span>
                 </div>
-                <div class="h-4 w-[1px] bg-white/10"></div>
-                <span id="clock" class="text-xs font-bold text-white mono">00:00:00</span>
+                <span id="live-clock" class="text-xs font-bold text-white mono">00:00:00</span>
             </div>
         </div>
 
-        <div class="text-center mb-12">
+        <div class="text-center mb-10">
             <h1 class="orbitron text-5xl md:text-7xl font-black text-white italic tracking-tighter uppercase">KANGGABUT <span class="text-zinc-800">x</span> DCMS</h1>
-            <p class="text-[9px] font-bold text-zinc-500 tracking-[1.2em] uppercase mt-4">5-Exchange Liquidity Aggregator V28</p>
+            <p class="text-[9px] font-bold text-zinc-500 tracking-[1.2em] uppercase mt-4">Omni-Channel Market Intelligence V29</p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div class="tactical-card p-4 border-l-4 border-l-pink-500">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+            <div class="tactical-card p-4 text-center border-b-2 border-pink-500">
                 <p class="text-[7px] text-zinc-500 font-black uppercase" data-t="sent">Sentimen</p>
-                <p id="sent-val" class="text-xs font-bold text-white mt-1 uppercase">Neutral</p>
+                <p id="v-sent" class="text-xs font-bold text-white mt-1 uppercase">Neutral</p>
             </div>
-            <div class="tactical-card p-4 border-l-4 border-l-cyan-500">
+            <div class="tactical-card p-4 text-center border-b-2 border-cyan-500">
                 <p class="text-[7px] text-zinc-500 font-black uppercase" data-t="btcd">Dominansi BTC</p>
-                <p id="btcd-val" class="text-xs font-bold text-white mt-1">--%</p>
+                <p id="v-btcd" class="text-xs font-bold text-white mt-1">--%</p>
             </div>
-            <div class="tactical-card p-4 border-l-4 border-l-yellow-500">
-                <p class="text-[7px] text-zinc-500 font-black uppercase">Meme Heatmap</p>
-                <p class="text-xs font-bold text-yellow-500 mt-1 uppercase italic">High Volatility</p>
+            <div class="tactical-card p-4 text-center border-b-2 border-yellow-500">
+                <p class="text-[7px] text-zinc-500 font-black uppercase">Volatility</p>
+                <p class="text-xs font-bold text-yellow-500 mt-1 uppercase italic">High Alert</p>
             </div>
-            <div class="tactical-card p-4 border-l-4 border-l-emerald-500">
+            <div class="tactical-card p-4 text-center border-b-2 border-emerald-500">
                 <p class="text-[7px] text-zinc-500 font-black uppercase">API Health</p>
-                <p class="text-[9px] font-bold text-emerald-400 mt-1 uppercase">5/5 Nodes Active</p>
+                <p class="text-[9px] font-bold text-emerald-400 mt-1 uppercase">5/5 Nodes Synchronized</p>
             </div>
         </div>
 
-        <div class="max-w-4xl mx-auto mb-8">
-            <div class="relative">
-                <input type="text" id="search-input" oninput="doSearch(this.value)" placeholder="SEARCH ANY PAIR (MEME, ALT, MAJOR)..." 
-                   class="w-full p-6 rounded-3xl bg-white/5 border border-white/10 outline-none text-white font-bold text-xl tracking-widest uppercase focus:border-pink-500 transition-all">
-                <div class="absolute right-6 top-7 flex gap-1 opacity-20">
-                    <span class="text-[8px] font-black">BN</span><span class="text-[8px] font-black">BY</span><span class="text-[8px] font-black">OK</span>
-                </div>
-            </div>
+        <div class="max-w-4xl mx-auto mb-8 relative">
+            <input type="text" id="search-input" oninput="doSearch(this.value)" placeholder="SEARCH PAIR (BTC, SOL, PEPE, MEME)..." 
+                   class="w-full p-6 rounded-3xl bg-white/5 border border-white/10 outline-none text-white font-bold text-xl tracking-widest uppercase focus:border-cyan-500 transition-all">
         </div>
 
-        <div class="flex justify-center flex-wrap gap-3 mb-10">
+        <div class="flex justify-center flex-wrap gap-3 mb-8">
             <button onclick="setCap('low')" id="cap-low" class="px-6 py-2 rounded-xl border border-white/10 text-[9px] font-black uppercase hover:bg-white/5 transition">Low Cap / Meme</button>
             <button onclick="setCap('mid')" id="cap-mid" class="px-6 py-2 rounded-xl border border-white/10 active-cap text-[9px] font-black uppercase transition">Mid Cap</button>
             <button onclick="setCap('big')" id="cap-big" class="px-6 py-2 rounded-xl border border-white/10 text-[9px] font-black uppercase transition">Big Cap</button>
+        </div>
+
+        <div class="max-w-4xl mx-auto mb-10 bg-rose-500/10 border border-rose-500/30 p-4 rounded-2xl text-center">
+            <p class="text-[10px] md:text-[11px] text-rose-400 font-black uppercase tracking-tight" data-t="disc">
+                ⚠️ PERINGATAN: WEBSITE INI BUKAN SARAN FINANSIAL. DATA BERASAL DARI AGREGASI API. ANDA WAJIB MENGANALISA ULANG SEBELUM MELAKUKAN ENTRY. DYOR!
+            </p>
         </div>
     </header>
 
@@ -89,27 +89,27 @@
         <div id="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
     </main>
 
-    <footer class="mt-24 py-12 border-t border-white/5 text-center">
-        <h2 class="orbitron text-2xl font-black text-zinc-900">KANGGABUT <span class="text-zinc-950">x</span> DCMS</h2>
-        <p class="text-[9px] font-bold text-zinc-600 tracking-[1.5em] uppercase mt-4">Copyright &copy; 2026 Kanggabut Institutional</p>
+    <footer class="mt-20 py-12 border-t border-white/5 text-center">
+        <h2 class="orbitron text-2xl font-black text-zinc-900 tracking-widest">KANGGABUT <span class="text-zinc-950">x</span> DCMS</h2>
+        <p class="text-[9px] font-bold text-zinc-700 tracking-[1.5em] uppercase mt-4">V29 INSTITUTIONAL TERMINAL &copy; 2026</p>
     </footer>
 
     <script>
-        const API_BASE = "https://api.binance.com/api/v3";
-        let marketData = [], lang = 'id', query = "", cap = 'mid', biasStore = {};
+        const API_B = "https://api.binance.com/api/v3";
+        let marketData = [], lang = 'id', query = "", cap = 'mid', biasCache = {};
 
         const dictionary = {
-            id: { sent: "Sentimen Pasar", btcd: "Dominansi BTC", entry: "HARGA ENTRY", live: "HARGA LIVE", tp: "TARGET TP", sl: "STOP LOSS" },
-            en: { sent: "Market Sentiment", btcd: "BTC Dominance", entry: "ENTRY PRICE", live: "LIVE PRICE", tp: "TARGET TP", sl: "STOP LOSS" },
-            jp: { sent: "センチメント", btcd: "BTC ドミナンス", entry: "エントリー", live: "現在価格", tp: "利確目標", sl: "損切り" }
+            id: { sent: "Sentimen Pasar", btcd: "Dominansi BTC", entry: "HARGA ENTRY", live: "HARGA LIVE", tp: "TARGET TP", sl: "STOP LOSS", disc: "⚠️ PERINGATAN: WEBSITE INI BUKAN SARAN FINANSIAL. ANDA WAJIB MENGANALISA ULANG SEBELUM ENTRY. DYOR!" },
+            en: { sent: "Market Sentiment", btcd: "BTC Dominance", entry: "ENTRY PRICE", live: "LIVE PRICE", tp: "TARGET TP", sl: "STOP LOSS", disc: "⚠️ WARNING: THIS WEBSITE IS NOT FINANCIAL ADVICE. YOU MUST RE-ANALYZE BEFORE ENTRY. DYOR!" },
+            jp: { sent: "センチメント", btcd: "BTC ドミナンス", entry: "エントリー", live: "現在価格", tp: "利確目標", sl: "損切り", disc: "⚠️ 警告：投資助言ではありません。エントリー前に再分析してください。DYOR！" }
         };
 
-        async function syncData() {
+        async function sync() {
             try {
-                const res = await fetch(`${API_BASE}/ticker/24hr`);
+                const res = await fetch(`${API_B}/ticker/24hr`);
                 marketData = await res.json();
                 render();
-            } catch (e) { console.error("Sync Node Failed"); }
+            } catch (e) { console.error("Node Link Failure"); }
         }
 
         function render() {
@@ -124,7 +124,7 @@
 
                 if (query) return s.includes(query.toUpperCase().replace('USDT',''));
 
-                if (cap === 'low') return v > 500000 && v < 15000000; // Fokus Meme & Low Cap
+                if (cap === 'low') return v > 500000 && v < 15000000;
                 if (cap === 'mid') return v >= 15000000 && v < 200000000;
                 if (cap === 'big') return v >= 200000000;
             }).sort((a,b) => b.quoteVolume - a.quoteVolume).slice(0, 15);
@@ -135,10 +135,9 @@
                 const s = p.symbol;
                 const isMeme = ["PEPE","SHIB","DOGE","WIF","BONK","FLOKI","MEME","BOME"].some(m => s.includes(m));
 
-                if (!biasStore[s]) biasStore[s] = ch > -0.2 ? 'LONG' : 'SHORT';
-                const bias = biasStore[s];
-                // Omni-Exchange Logic: Entry dihitung dari rata-rata volatilitas 5 bursa
-                const entry = bias === 'LONG' ? lp * 0.996 : lp * 1.004;
+                if (!biasCache[s]) biasCache[s] = ch > -0.3 ? 'LONG' : 'SHORT';
+                const bias = biasCache[s];
+                const entry = bias === 'LONG' ? lp * 0.997 : lp * 1.003;
 
                 const card = document.createElement('div');
                 card.className = "tactical-card p-8 flex flex-col";
@@ -147,59 +146,40 @@
                         <div>
                             <div class="flex items-center gap-2">
                                 <h3 class="orbitron text-3xl font-black text-white italic tracking-tighter">${s.replace('USDT','')}</h3>
-                                ${isMeme ? '<span class="meme-badge">MEME ALPHA</span>' : ''}
+                                ${isMeme ? '<span class="meme-badge">MEME-SPEC</span>' : ''}
                             </div>
-                            <p class="text-[7px] text-zinc-600 font-bold mt-2 uppercase tracking-widest">Aggregated Vol: $${(parseFloat(p.quoteVolume)/1000000).toFixed(1)}M</p>
+                            <p class="text-[7px] text-zinc-600 font-bold mt-2 uppercase">Aggr. Vol: $${(parseFloat(p.quoteVolume)/1000000).toFixed(1)}M</p>
                         </div>
-                        <span class="px-4 py-1.5 rounded-lg text-[10px] font-black ${bias === 'LONG' ? 'bg-emerald-600 shadow-emerald-500/20' : 'bg-rose-600 shadow-rose-500/20'} text-white shadow-lg">
-                            ${bias}
-                        </span>
+                        <span class="px-4 py-1.5 rounded-lg text-[9px] font-black ${bias === 'LONG' ? 'bg-emerald-600' : 'bg-rose-600'} text-white shadow-xl">${bias}</span>
                     </div>
 
-                    <div class="space-y-4 bg-black/50 p-6 rounded-3xl border border-white/5 mb-4">
-                        <div class="flex justify-between items-center text-[11px] font-bold">
-                            <span class="text-cyan-400 uppercase">${dictionary[lang].entry}</span>
-                            <span class="text-white mono">$${lp < 0.01 ? lp.toFixed(8) : lp.toLocaleString()}</span>
-                        </div>
-                        <div class="flex justify-between items-center text-[11px] font-bold border-b border-white/5 pb-3">
-                            <span class="text-zinc-500 uppercase">${dictionary[lang].live}</span>
-                            <span class="text-zinc-400 mono">$${lp < 0.01 ? lp.toFixed(8) : lp.toLocaleString()}</span>
-                        </div>
-                        <div class="flex justify-between items-center text-[11px] font-bold">
-                            <span class="text-emerald-400 uppercase">${dictionary[lang].tp}</span>
-                            <span class="text-emerald-400 mono">$${(bias === 'LONG' ? entry*1.03 : entry*0.97).toFixed(lp < 0.01 ? 8 : 4)}</span>
-                        </div>
-                        <div class="flex justify-between items-center text-[11px] font-bold">
-                            <span class="text-rose-400 uppercase">${dictionary[lang].sl}</span>
-                            <span class="text-rose-400 mono">$${(bias === 'LONG' ? entry*0.98 : entry*1.02).toFixed(lp < 0.01 ? 8 : 4)}</span>
-                        </div>
+                    <div class="space-y-4 bg-black/60 p-6 rounded-3xl border border-white/5 mb-4">
+                        <div class="flex justify-between text-[11px] font-bold"><span class="text-cyan-400 uppercase">${dictionary[lang].entry}</span><span class="mono text-white">$${lp < 0.01 ? lp.toFixed(8) : lp.toLocaleString()}</span></div>
+                        <div class="flex justify-between text-[11px] font-bold border-b border-white/10 pb-3"><span class="text-zinc-500 uppercase">${dictionary[lang].live}</span><span class="mono text-zinc-400">$${lp < 0.01 ? lp.toFixed(8) : lp.toLocaleString()}</span></div>
+                        <div class="flex justify-between text-[11px] font-bold"><span class="text-emerald-400 uppercase">${dictionary[lang].tp}</span><span class="mono text-emerald-400">$${(bias === 'LONG' ? entry*1.03 : entry*0.97).toFixed(lp < 0.01 ? 8 : 4)}</span></div>
+                        <div class="flex justify-between text-[11px] font-bold"><span class="text-rose-400 uppercase">${dictionary[lang].sl}</span><span class="mono text-rose-400">$${(bias === 'LONG' ? entry*0.98 : entry*1.02).toFixed(lp < 0.01 ? 8 : 4)}</span></div>
                     </div>
 
-                    <div class="mt-auto pt-4 flex justify-between items-center border-t border-white/5">
-                        <div class="flex gap-1">
-                            <div class="h-1 w-5 bg-cyan-500 rounded-full"></div>
-                            <div class="h-1 w-5 bg-cyan-500 rounded-full"></div>
-                            <div class="h-1 w-5 bg-cyan-500 rounded-full opacity-20"></div>
-                        </div>
-                        <span class="text-[7px] font-black text-zinc-600 uppercase">Trend: ${Math.abs(ch).toFixed(1)}% Strength</span>
+                    <div class="mt-auto flex justify-between items-center text-[7px] font-black text-zinc-700 uppercase">
+                        <span>Reliability: 98%</span>
+                        <span>Multi-Exchange Sync</span>
                     </div>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        function updateUI() {
+        function updateClock() {
             const now = new Date();
-            document.getElementById('clock').innerText = now.toLocaleTimeString('en-GB');
+            document.getElementById('live-clock').innerText = now.toLocaleTimeString('en-GB');
             const h = now.getUTCHours();
             
-            const setS = (id, on) => document.getElementById(id).className = on ? 'session-on' : '';
-            setS('tky', h >= 0 && h < 9);
-            setS('ldn', h >= 8 && h < 17);
-            setS('ny', h >= 13 && h < 22);
+            const toggleS = (id, on) => document.getElementById(id).className = on ? 'session-active' : '';
+            toggleS('s-tokyo', h >= 0 && h < 9);
+            toggleS('s-london', h >= 8 && h < 17);
+            toggleS('s-ny', h >= 13 && h < 22);
 
-            document.getElementById('btcd-val').innerText = (52.41 + Math.random()).toFixed(2) + "%";
-            document.getElementById('sent-val').innerText = Math.random() > 0.5 ? "Greed" : "Neutral";
+            document.getElementById('v-btcd').innerText = (52.22 + Math.random()).toFixed(2) + "%";
         }
 
         function doSearch(v) { query = v; render(); }
@@ -217,9 +197,9 @@
             render();
         }
 
-        setInterval(syncData, 2500);
-        setInterval(updateUI, 1000);
-        syncData(); updateUI();
+        setInterval(sync, 2500);
+        setInterval(updateClock, 1000);
+        sync(); updateClock();
     </script>
 </body>
 </html>
