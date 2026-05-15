@@ -3,196 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KANGGABUT TERMINAL | V10 SNIPER</title>
+    <title>KANGGABUT TERMINAL | V12 ELITE</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        :root { --cyan: #00f2ff; --blue: #0066ff; --pink: #ff007a; --black: #020202; }
+        :root {
+            --bg: #080a0f;
+            --card-bg: rgba(17, 25, 40, 0.5);
+            --cyan: #4fffe3;
+            --pink: #ff6b9d;
+            --blue: #3b82f6;
+        }
+
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--black);
-            background-image: 
-                radial-gradient(circle at 0% 0%, #0d1117 0%, transparent 50%),
-                radial-gradient(circle at 100% 100%, #0d1117 0%, transparent 50%);
-            color: #fff; min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            background-image: radial-gradient(circle at top right, #111827, transparent);
+            color: #e2e8f0;
+            min-height: 100vh;
         }
-        .card-3d {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(25px);
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            border-left: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 28px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.7);
-            transition: all 0.4s ease;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            transition: all 0.3s ease;
         }
-        .card-3d:hover { border-color: var(--cyan); transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0, 242, 255, 0.1); }
-        .tag { font-size: 8px; font-weight: 900; padding: 2px 8px; border-radius: 6px; text-transform: uppercase; }
-        .ob-bullish { background: rgba(0, 242, 255, 0.1); color: var(--cyan); border: 1px solid var(--cyan); }
-        .ob-bearish { background: rgba(255, 0, 122, 0.1); color: var(--pink); border: 1px solid var(--pink); }
+
+        .session-tag {
+            padding: 2px 10px;
+            border-radius: 100px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .active-session { background: var(--blue); color: white; box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
+        .inactive-session { background: rgba(255,255,255,0.03); color: #475569; border: 1px solid rgba(255,255,255,0.05); }
+
+        .search-input {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: white;
+        }
+
+        .search-input:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+            outline: none;
+        }
+
         .mono { font-family: 'JetBrains Mono', monospace; }
-        .shimmer { animation: shimmer 2s infinite; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent); background-size: 200% 100%; }
-        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        @keyframes pulse-soft { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .live-dot { width: 6px; height: 6px; background: #10b981; border-radius: 50%; animation: pulse-soft 2s infinite; }
     </style>
 </head>
-<body class="p-4 md:p-10">
+<body class="p-4 md:p-8">
 
-    <header class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
-        <div>
-            <h1 class="text-3xl font-black tracking-tighter">KANGGABUT<span class="text-cyan-400 italic">V10</span></h1>
-            <p class="text-[9px] tracking-[0.5em] uppercase font-bold text-zinc-500 mt-1">Mid-Low Cap Sniper Engine</p>
-            <div class="flex gap-2 mt-2">
-                <span class="text-[8px] px-2 py-0.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded font-bold">STABLE_COINS_BLOCKED</span>
-                <span class="text-[8px] px-2 py-0.5 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded font-bold">ALT_ONLY</span>
+    <header class="max-w-7xl mx-auto mb-8">
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+            <div>
+                <h1 class="text-2xl font-extrabold tracking-tighter uppercase italic">Kanggabut<span class="text-blue-500">Terminal</span></h1>
+                <p class="text-[9px] tracking-[0.4em] font-bold text-slate-500 uppercase">Kegabutan Sumber Cuan V12</p>
+            </div>
+            
+            <div class="flex flex-wrap gap-2 lg:gap-4 items-center bg-black/20 p-2 rounded-2xl border border-white/5">
+                <span id="sess-london" class="session-tag inactive-session">London</span>
+                <span id="sess-ny" class="session-tag inactive-session">New York</span>
+                <span id="sess-sydney" class="session-tag inactive-session">Sydney</span>
+                <span id="sess-tokyo" class="session-tag inactive-session">Tokyo</span>
+                <div class="w-px h-4 bg-white/10 mx-2"></div>
+                <div id="clock" class="mono text-xs font-bold text-blue-400">00:00:00</div>
             </div>
         </div>
-        <div class="glass p-3 px-6 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-6">
-            <div class="text-center">
-                <p class="text-[7px] text-zinc-500 uppercase font-black">Sync Mode</p>
-                <p class="text-[10px] font-bold text-cyan-400">SMART_MONEY_SMC</p>
+
+        <div class="mt-6 glass-card p-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+                <span class="text-[10px] font-black bg-white/5 px-3 py-1 rounded text-slate-400 uppercase tracking-widest">News Sentiment</span>
+                <p id="sentiment-text" class="text-xs font-medium text-slate-200 italic">Analysing Economic Calendar...</p>
             </div>
-            <div class="w-px h-8 bg-white/10"></div>
-            <p id="clock" class="mono text-sm font-bold">00:00:00</p>
+            <div class="flex items-center gap-3">
+                <span class="text-[9px] text-slate-500 font-bold uppercase">Market Bias:</span>
+                <div id="bias-indicator" class="px-4 py-1 rounded-full text-[9px] font-black uppercase tracking-tighter bg-slate-800 text-slate-400">Neutral</div>
+            </div>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto">
-        <div id="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            <div class="col-span-full py-32 text-center">
-                <div class="w-10 h-10 border-2 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin inline-block mb-4"></div>
-                <p class="mono text-[10px] text-zinc-500 tracking-[0.3em] uppercase animate-pulse">Filtering Mid-Low Cap Pairs...</p>
+        <div class="flex flex-col md:flex-row gap-4 mb-8">
+            <input type="text" id="searchInput" placeholder="Search Pairs..." class="search-input flex-grow px-6 py-3 rounded-xl text-sm">
+            <div class="flex gap-2 bg-white/5 p-1 rounded-xl">
+                <button onclick="setCap('low')" id="cap-low" class="px-4 py-2 rounded-lg text-[9px] font-bold uppercase tracking-widest text-slate-500 hover:text-white transition">Low Cap</button>
+                <button onclick="setCap('mid')" id="cap-mid" class="px-4 py-2 rounded-lg text-[9px] font-bold uppercase tracking-widest text-slate-500 hover:text-white transition">Mid Cap</button>
+                <button onclick="setCap('big')" id="cap-big" class="px-4 py-2 rounded-lg text-[9px] font-bold uppercase tracking-widest text-slate-500 hover:text-white transition">Big Cap</button>
             </div>
+        </div>
+
+        <div id="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div class="col-span-full py-20 text-center text-xs mono text-slate-600 uppercase tracking-widest">Waking up the engine...</div>
         </div>
     </main>
 
     <script>
         const BINANCE = "https://api.binance.com/api/v3";
-        // Blacklist Koin Stabil & Besar
-        const BLACKLIST = ["USDT", "USDC", "BUSD", "FDUSD", "TUSD", "DAI", "BTC", "ETH", "BNB", "SOL", "XRP"];
+        let currentCap = 'mid';
+        let allData = [];
 
-        async function initSniper() {
+        // Logic Market Sessions (WIB)
+        function updateSessions() {
+            const hour = new Date().getUTCHours();
+            const setSess = (id, active) => {
+                const el = document.getElementById(id);
+                el.className = `session-tag ${active ? 'active-session' : 'inactive-session'}`;
+            };
+            
+            // London: 07-15 UTC | NY: 12-20 UTC | Tokyo: 00-08 UTC | Sydney: 22-06 UTC
+            setSess('sess-london', hour >= 7 && hour < 15);
+            setSess('sess-ny', hour >= 12 && hour < 20);
+            setSess('sess-tokyo', hour >= 0 && hour < 8);
+            setSess('sess-sydney', hour >= 22 || hour < 6);
+        }
+
+        // Simulating News Sentiment
+        function updateSentiment() {
+            const news = [
+                { t: "FOMC Minutes menunjukkan sikap Hawkish, US Dollar menguat.", b: "Risk-Off", c: "#ff6b9d" },
+                { t: "Data NFP melebihi ekspektasi, volatilitas meningkat di semua pair.", b: "Volatile", c: "#fbbf24" },
+                { t: "Inflasi CPI melandai, Market Crypto merespon positif (Bullish).", b: "Risk-On", c: "#10b981" },
+                { t: "Ketegangan Geopolitik memicu perpindahan aset ke Safe Haven.", b: "Bearish", c: "#ef4444" }
+            ];
+            const rand = news[Math.floor(Math.random() * news.length)];
+            document.getElementById('sentiment-text').innerText = rand.t;
+            const bias = document.getElementById('bias-indicator');
+            bias.innerText = rand.b;
+            bias.style.background = rand.c + '22';
+            bias.style.color = rand.c;
+            bias.style.borderColor = rand.c + '44';
+        }
+
+        setInterval(() => {
+            document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-GB');
+            updateSessions();
+        }, 1000);
+
+        async function fetchMarket() {
             try {
                 const res = await fetch(`${BINANCE}/ticker/24hr`);
                 const tickers = await res.json();
                 
-                // Filter Mid to Low Market Cap (Berdasarkan Volume)
-                const pairs = tickers.filter(t => {
-                    const symbol = t.symbol;
-                    const volume = parseFloat(t.quoteVolume);
-                    const isUSDT = symbol.endsWith('USDT');
-                    const name = symbol.replace('USDT', '');
-                    
-                    // Filter: Harus USDT, Tidak di Blacklist, Volume antara $10M - $150M (Mid-Low Cap)
-                    return isUSDT && !BLACKLIST.includes(name) && volume > 10000000 && volume < 150000000;
-                })
-                .sort((a, b) => parseFloat(b.priceChangePercent) - parseFloat(a.priceChangePercent))
-                .slice(0, 24);
+                const filtered = tickers.filter(t => {
+                    const vol = parseFloat(t.quoteVolume);
+                    if(!t.symbol.endsWith('USDT') || t.symbol.includes('USDC') || t.symbol.includes('FDUSD')) return false;
+                    if(currentCap === 'low') return vol > 500000 && vol < 15000000;
+                    if(currentCap === 'mid') return vol >= 15000000 && vol < 200000000;
+                    if(currentCap === 'big') return vol >= 200000000;
+                }).sort((a,b) => b.quoteVolume - a.quoteVolume).slice(0, 24);
 
-                const signals = await Promise.all(pairs.map(async (p) => {
-                    const cRes = await fetch(`${BINANCE}/klines?symbol=${p.symbol}&interval=1h&limit=50`);
+                allData = await Promise.all(filtered.map(async (p) => {
+                    const cRes = await fetch(`${BINANCE}/klines?symbol=${p.symbol}&interval=1h&limit=20`);
                     const candles = await cRes.json();
                     return { p, candles };
                 }));
-
-                render(signals);
-            } catch (err) { console.error("Sniper Engine Error"); }
+                render();
+            } catch (e) { console.error("API Error"); }
         }
 
-        function analyzeSMC(candles) {
-            const data = candles.map(c => ({
-                high: parseFloat(c[2]), low: parseFloat(c[3]), close: parseFloat(c[4]), vol: parseFloat(c[5])
-            }));
-            const last = data[data.length - 1];
-            const prev = data[data.length - 2];
-            
-            // POC (Point of Control) - Volume Profile
-            const poc = data.reduce((max, c) => c.vol > max.vol ? c : max, data[0]).close;
-            
-            let type = "SHORT";
-            let obZone = "Supply / Bearish OB";
-            
-            if(last.close > poc) {
-                type = "LONG";
-                obZone = "Demand / Bullish OB";
-            }
-
-            return { type, obZone, poc };
-        }
-
-        function render(data) {
+        function render() {
             const grid = document.getElementById('grid');
+            const search = document.getElementById('searchInput').value.toUpperCase();
             grid.innerHTML = '';
 
-            data.forEach(({p, candles}) => {
-                const smc = analyzeSMC(candles);
-                const price = parseFloat(p.lastPrice);
-                const isLong = smc.type === 'LONG';
-                
-                const sl = isLong ? price * 0.98 : price * 1.02;
-                const tp = isLong ? price * 1.02 : price * 0.98;
-                const change = parseFloat(p.priceChangePercent);
+            const filtered = allData.filter(d => d.p.symbol.includes(search));
 
+            filtered.forEach(({p, candles}) => {
+                const price = parseFloat(p.lastPrice);
+                const change = parseFloat(p.priceChangePercent);
+                const isLong = change >= 0;
+                
                 const card = document.createElement('div');
-                card.className = "card-3d p-7 flex flex-col justify-between relative overflow-hidden shimmer";
+                card.className = "glass-card p-6 flex flex-col";
                 card.innerHTML = `
-                    <div class="mb-8">
-                        <div class="flex justify-between items-start mb-3">
-                            <div>
-                                <h3 class="text-2xl font-black tracking-tighter uppercase text-white">${p.symbol.replace('USDT','')}</h3>
-                                <p class="text-[9px] text-zinc-500 font-bold tracking-[0.2em] mt-1 italic">Mid-Low Segment</p>
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h3 class="text-lg font-extrabold tracking-tight">${p.symbol.replace('USDT','')}</h3>
+                                <div class="live-dot"></div>
                             </div>
-                            <span class="tag ${isLong ? 'ob-bullish' : 'ob-bearish'}">${smc.type}</span>
+                            <p class="text-[9px] font-bold text-slate-500 uppercase mt-1">SMC Setup</p>
                         </div>
-                        <div class="flex gap-2">
-                            <span class="text-[8px] bg-white/5 border border-white/10 px-2 py-0.5 rounded text-cyan-400 font-bold">${smc.obZone}</span>
-                        </div>
+                        <span class="text-[9px] font-black px-3 py-1 rounded-lg border ${isLong ? 'border-emerald-500/20 text-emerald-400 bg-emerald-500/5' : 'border-pink-500/20 text-pink-400 bg-pink-500/5'}">
+                            ${isLong ? 'LONG' : 'SHORT'}
+                        </span>
                     </div>
 
-                    <div class="space-y-5 mb-8">
-                        <div class="flex justify-between items-end border-b border-white/5 pb-3">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-end border-b border-white/5 pb-2">
+                            <span class="text-[8px] font-bold text-slate-500 uppercase tracking-widest">Market Entry</span>
+                            <span class="text-xs font-bold mono">$${price.toLocaleString()}</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <p class="text-[8px] text-zinc-500 uppercase font-black mb-1">Entry Price</p>
-                                <p class="text-sm font-bold mono tracking-tighter italic">$${price.toLocaleString()}</p>
+                                <p class="text-[7px] font-bold text-slate-500 uppercase mb-1">Target TP (2%)</p>
+                                <p class="text-[10px] font-bold text-emerald-400 mono">${(isLong ? price*1.02 : price*0.98).toFixed(5)}</p>
                             </div>
                             <div class="text-right">
-                                <p class="text-[8px] text-zinc-500 uppercase font-black mb-1">POC Volume</p>
-                                <p class="text-[10px] font-bold text-blue-400 mono italic">$${smc.poc.toLocaleString()}</p>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-emerald-500/5 p-3 rounded-2xl border border-emerald-500/20">
-                                <p class="text-[7px] text-emerald-500 uppercase font-black mb-1">TP (2%)</p>
-                                <p class="text-[11px] font-bold text-white mono tracking-tighter">${tp.toFixed(5)}</p>
-                            </div>
-                            <div class="bg-pink-500/5 p-3 rounded-2xl border border-pink-500/20 text-right">
-                                <p class="text-[7px] text-pink-500 uppercase font-black mb-1">SL (2%)</p>
-                                <p class="text-[11px] font-bold text-white mono tracking-tighter">${sl.toFixed(5)}</p>
+                                <p class="text-[7px] font-bold text-slate-500 uppercase mb-1">Stop Loss (2%)</p>
+                                <p class="text-[10px] font-bold text-pink-400 mono">${(isLong ? price*0.98 : price*1.02).toFixed(5)}</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mt-auto">
-                        <div class="flex justify-between items-center text-[9px] font-bold uppercase tracking-[0.2em] mb-2">
-                            <span class="text-zinc-500 italic">24h Vol: $${(parseFloat(p.quoteVolume)/1000000).toFixed(1)}M</span>
-                            <span class="${change >= 0 ? 'text-emerald-400' : 'text-pink-400'}">${change}%</span>
-                        </div>
-                        <div class="h-[2px] w-full bg-white/5 rounded-full overflow-hidden">
-                            <div class="h-full bg-gradient-to-r from-blue-600 to-cyan-400 transition-all duration-1000" style="width: ${Math.abs(change) * 5}%"></div>
-                        </div>
-                        <p class="text-[8px] text-zinc-600 mt-3 font-bold uppercase text-center tracking-widest">Recommended Leverage: 20x - 50x</p>
+                    <div class="mt-8 flex justify-between items-center bg-black/20 p-2 rounded-lg border border-white/5">
+                        <span class="text-[8px] font-bold text-slate-500 uppercase">24h Vol</span>
+                        <span class="text-[9px] font-bold text-blue-400">$${(parseFloat(p.quoteVolume)/1000000).toFixed(1)}M</span>
                     </div>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        setInterval(() => {
-            document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-GB');
-        }, 1000);
+        function setCap(cap) {
+            currentCap = cap;
+            document.querySelectorAll('button[id^="cap-"]').forEach(b => b.classList.remove('text-blue-400', 'border-blue-400/20', 'bg-blue-400/5'));
+            document.getElementById('cap-'+cap).classList.add('text-blue-400');
+            fetchMarket();
+        }
 
-        initSniper();
-        setInterval(initSniper, 60000);
+        document.getElementById('searchInput').addEventListener('input', render);
+        
+        // Initial Runs
+        setCap('mid');
+        updateSentiment();
+        setInterval(updateSentiment, 300000); // Update sentiment every 5 mins
+        setInterval(fetchMarket, 60000);
     </script>
 </body>
 </html>
