@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KANGGABUT x DCMS | TERMINAL</title>
+    <title>KANGGABUT x DCMS | ALPHA TERMINAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
@@ -12,43 +12,44 @@
             --card-bg: rgba(10, 14, 20, 0.85);
             --cyan: #00f2ff;
             --blue: #3b82f6;
+            --emerald: #10b981;
+            --rose: #f43f5e;
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg);
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.05) 0px, transparent 50%);
+            background-image: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.05) 0px, transparent 50%);
             color: #f1f5f9; min-height: 100vh;
         }
 
-        /* Responsive Branding */
-        .brand-container {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
+        /* Fixed Branding */
         .brand-logo {
-            /* Menggunakan clamp agar ukuran font adaptif: Min 1.5rem, Pref 4vw, Max 2.2rem */
-            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-size: clamp(1.4rem, 5vw, 2.2rem);
             font-weight: 800;
-            letter-spacing: -0.04em;
+            letter-spacing: -0.02em;
             text-transform: uppercase;
             font-style: italic;
             background: linear-gradient(135deg, #fff 0%, #3b82f6 50%, #00f2ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
+            padding: 10px 0; /* Padding tambahan agar font tidak terpotong */
+            line-height: 1.2;
         }
 
-        .brand-sub {
-            letter-spacing: 0.5em;
-            font-weight: 700;
-            color: #475569;
-            font-size: clamp(7px, 1.5vw, 9px);
-            margin-top: 2px;
+        .session-badge {
+            font-size: 8px;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 100px;
             text-transform: uppercase;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s;
         }
+
+        .session-active { background: var(--blue); color: white; border-color: var(--blue); box-shadow: 0 0 15px rgba(59, 130, 246, 0.3); }
+        .session-inactive { color: #475569; background: rgba(255,255,255,0.02); }
 
         .glass-card {
             background: var(--card-bg);
@@ -59,60 +60,46 @@
             transition: all 0.3s ease;
         }
 
-        .glass-card:hover {
-            border-color: var(--cyan);
-            transform: translateY(-5px);
-        }
-
-        .cap-filter-container {
-            max-width: 400px;
-            margin: 0 auto 3rem auto;
-        }
-
         .btn-cap {
-            flex: 1;
-            padding: 10px 0;
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            color: #64748b;
-            transition: all 0.3s;
-            letter-spacing: 0.1em;
+            flex: 1; padding: 12px 0; font-size: 10px; font-weight: 800; text-transform: uppercase; color: #64748b; transition: all 0.3s;
         }
 
-        .btn-cap.active {
-            color: var(--cyan);
-            background: rgba(0, 242, 255, 0.05);
-            box-shadow: inset 0 0 10px rgba(0, 242, 255, 0.1);
-            border-radius: 12px;
-        }
+        .btn-cap.active { color: var(--cyan); background: rgba(0, 242, 255, 0.05); border-radius: 12px; }
 
         .mono { font-family: 'JetBrains Mono', monospace; }
-
-        @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-        .live-dot { width: 6px; height: 6px; background: #10b981; border-radius: 50%; animation: pulse-dot 2s infinite; }
     </style>
 </head>
-<body class="p-6 md:p-12">
+<body class="p-4 md:p-8">
 
-    <header class="max-w-7xl mx-auto flex flex-col items-center">
-        <div class="brand-container">
+    <header class="max-w-7xl mx-auto flex flex-col items-center text-center">
+        <div class="mb-2">
             <h1 class="brand-logo">KANGGABUT <span class="font-thin text-white/20">X</span> DCMS</h1>
-            <div class="brand-sub">LIQUIDITY MONITOR</div>
+            <p class="text-[8px] tracking-[0.5em] font-bold text-slate-500 uppercase">Institutional Alpha Terminal</p>
         </div>
 
-        <div class="flex items-center gap-4 mb-10 bg-white/[0.02] px-4 py-2 rounded-full border border-white/5">
-            <div class="flex items-center gap-2 pr-4 border-r border-white/10">
-                <div class="live-dot"></div>
-                <span class="text-[9px] font-bold text-zinc-500 uppercase tracking-widest">Live</span>
+        <div class="w-full max-w-4xl mt-6 space-y-4">
+            <div class="flex flex-wrap justify-center gap-2 md:gap-4">
+                <div id="sess-london" class="session-badge session-inactive">London</div>
+                <div id="sess-ny" class="session-badge session-inactive">New York</div>
+                <div id="sess-tokyo" class="session-badge session-inactive">Tokyo</div>
+                <div id="sess-sydney" class="session-badge session-inactive">Sydney</div>
+                <div class="h-4 w-[1px] bg-white/10 hidden md:block"></div>
+                <div id="clock" class="mono text-[10px] font-bold text-zinc-400 self-center">00:00:00</div>
             </div>
-            <div id="clock" class="mono text-[10px] font-bold text-zinc-400">00:00:00</div>
+
+            <div class="bg-white/[0.02] border border-white/5 p-3 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <span class="text-[7px] font-black bg-white/5 px-2 py-1 rounded text-zinc-500 uppercase tracking-widest">Global Sentiment</span>
+                    <p id="sentiment-text" class="text-[10px] font-medium text-slate-300 italic italic">Scanning Economic Calendar...</p>
+                </div>
+                <div id="bias-indicator" class="text-[9px] font-black uppercase px-4 py-1 rounded-full bg-zinc-800 text-zinc-500">Neutral</div>
+            </div>
         </div>
 
-        <div class="cap-filter-container w-full">
+        <div class="w-full max-w-md my-8">
             <div class="flex p-1 bg-white/[0.03] rounded-2xl border border-white/5">
                 <button onclick="setCap('low')" id="cap-low" class="btn-cap">Low Cap</button>
-                <button onclick="setCap('mid')" id="cap-mid" class="btn-cap">Mid Cap</button>
+                <button onclick="setCap('mid')" id="cap-mid" class="btn-cap active">Mid Cap</button>
                 <button onclick="setCap('big')" id="cap-big" class="btn-cap">Big Cap</button>
             </div>
         </div>
@@ -120,46 +107,68 @@
 
     <main class="max-w-7xl mx-auto">
         <div id="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <div class="col-span-full py-20 text-center opacity-20 text-[9px] mono tracking-[0.8em] uppercase">Syncing Market Data...</div>
+            <div class="col-span-full py-20 text-center opacity-20 text-[9px] mono tracking-[0.8em] uppercase">Initializing Pure Altcoin Data...</div>
         </div>
     </main>
 
     <script>
         const API = "https://api.binance.com/api/v3";
         let currentCap = 'mid';
-        let marketCache = [];
 
-        // Clock Update
-        setInterval(() => {
+        // 1. Session Logic (UTC Based)
+        function updateSessions() {
+            const hour = new Date().getUTCHours();
+            const setSess = (id, active) => {
+                const el = document.getElementById(id);
+                el.className = `session-badge ${active ? 'session-active' : 'session-inactive'}`;
+            };
+            setSess('sess-london', hour >= 7 && hour < 15);
+            setSess('sess-ny', hour >= 12 && hour < 20);
+            setSess('sess-tokyo', hour >= 0 && hour < 8);
+            setSess('sess-sydney', hour >= 22 || hour < 6);
             document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-GB');
-        }, 1000);
+        }
 
+        // 2. Sentiment Logic (Mock based on common Macro events)
+        function updateSentiment() {
+            const macroData = [
+                { t: "CPI Data melandai, Market merespon Bullish.", b: "Risk-On", c: "#10b981" },
+                { t: "FOMC Hawkish stance terdeteksi, USD menguat.", b: "Risk-Off", c: "#f43f5e" },
+                { t: "Whale Wallet melakukan akumulasi di zona Demand.", b: "Bullish", c: "#00f2ff" },
+                { t: "Volatilitas meningkat menjelang rilis data NFP.", b: "Volatile", c: "#fbbf24" }
+            ];
+            const rand = macroData[Math.floor(Math.random() * macroData.length)];
+            document.getElementById('sentiment-text').innerText = rand.t;
+            const bias = document.getElementById('bias-indicator');
+            bias.innerText = rand.b;
+            bias.style.color = rand.c;
+            bias.style.background = rand.c + '11';
+        }
+
+        // 3. Market Logic
         async function fetchMarket() {
             try {
                 const res = await fetch(`${API}/ticker/24hr`);
                 const data = await res.json();
-                
                 const forbidden = /(USDC|FDUSD|TUSD|DAI|USDP|EUR|GBP|JPY|AUD|CAD|TRY|BRL|ZAR|RUB|AEUR|PAXG|BUSD)/;
 
                 const filtered = data.filter(t => {
                     const vol = parseFloat(t.quoteVolume);
                     if (!t.symbol.endsWith('USDT') || forbidden.test(t.symbol) || t.symbol === "USDTUSDT") return false;
-
                     if (currentCap === 'low') return vol > 100000 && vol < 10000000;
                     if (currentCap === 'mid') return vol >= 10000000 && vol < 150000000;
                     if (currentCap === 'big') return vol >= 150000000;
-                }).sort((a,b) => b.quoteVolume - a.quoteVolume).slice(0, 32);
+                }).sort((a,b) => b.quoteVolume - a.quoteVolume).slice(0, 24);
 
-                marketCache = filtered;
-                render();
-            } catch (e) { console.error("API Error"); }
+                render(filtered);
+            } catch (e) { console.error("Sync Error"); }
         }
 
-        function render() {
+        function render(pairs) {
             const grid = document.getElementById('grid');
             grid.innerHTML = '';
 
-            marketCache.forEach(p => {
+            pairs.forEach(p => {
                 const price = parseFloat(p.lastPrice);
                 const change = parseFloat(p.priceChangePercent);
                 const isLong = change >= 0;
@@ -169,26 +178,25 @@
                 card.innerHTML = `
                     <div class="flex justify-between items-start mb-6">
                         <div>
-                            <h3 class="text-xl font-extrabold tracking-tight text-white">${p.symbol.replace('USDT','')}</h3>
-                            <p class="text-[8px] font-black text-blue-500/50 tracking-widest mt-1 uppercase">Altcoin</p>
+                            <h3 class="text-xl font-extrabold text-white">${p.symbol.replace('USDT','')}</h3>
+                            <p class="text-[8px] font-black text-blue-500/50 tracking-widest mt-1 uppercase italic">Pure Altcoin</p>
                         </div>
-                        <span class="text-[8px] font-black px-2 py-1 rounded bg-white/5 border border-white/5 ${isLong ? 'text-emerald-400' : 'text-pink-500'}">
+                        <span class="text-[8px] font-black px-2 py-1 rounded bg-white/5 ${isLong ? 'text-emerald-400' : 'text-rose-500'}">
                             ${change}%
                         </span>
                     </div>
-
                     <div class="space-y-4">
                         <div class="flex justify-between items-center border-b border-white/5 pb-2">
-                            <span class="text-[8px] font-bold text-zinc-600 uppercase">Price</span>
-                            <span class="text-xs font-bold mono italic text-zinc-200">$${price.toLocaleString()}</span>
+                            <span class="text-[8px] font-bold text-zinc-600 uppercase">Market Price</span>
+                            <span class="text-xs font-bold mono text-zinc-200 italic">$${price.toLocaleString()}</span>
                         </div>
                         <div class="grid grid-cols-2 gap-3 pt-1">
                             <div class="bg-emerald-500/[0.02] p-3 rounded-xl border border-emerald-500/10">
                                 <p class="text-[7px] font-black text-emerald-500 uppercase mb-1">Target TP</p>
                                 <p class="text-[10px] font-bold text-zinc-100 mono">${(isLong ? price*1.02 : price*0.98).toFixed(5)}</p>
                             </div>
-                            <div class="bg-pink-500/[0.02] p-3 rounded-xl border border-pink-500/10 text-right">
-                                <p class="text-[7px] font-black text-pink-500 uppercase mb-1">Stop Loss</p>
+                            <div class="bg-rose-500/[0.02] p-3 rounded-xl border border-rose-500/10 text-right">
+                                <p class="text-[7px] font-black text-rose-500 uppercase mb-1">Stop Loss</p>
                                 <p class="text-[10px] font-bold text-zinc-100 mono">${(isLong ? price*0.98 : price*1.02).toFixed(5)}</p>
                             </div>
                         </div>
@@ -205,8 +213,13 @@
             fetchMarket();
         }
 
-        setCap('mid');
+        // Init Cycles
+        setInterval(updateSessions, 1000);
+        setInterval(updateSentiment, 300000);
         setInterval(fetchMarket, 30000);
+        updateSessions();
+        updateSentiment();
+        fetchMarket();
     </script>
 </body>
 </html>
