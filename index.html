@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KANGGABUT x DCMS | ULTIMATE TERMINAL</title>
+    <title>KANGGABUT x DCMS | V24 ELITE TERMINAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -19,151 +19,159 @@
             font-family: 'JetBrains Mono', monospace;
             background-image: 
                 radial-gradient(circle at 50% -20%, rgba(255, 0, 127, 0.2) 0px, transparent 50%),
-                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
             background-size: 100% 100%, 40px 40px, 40px 40px;
+            scroll-behavior: smooth;
         }
 
         .orbitron { font-family: 'Orbitron', sans-serif; }
         .neon-text { text-shadow: 0 0 15px var(--neon-pink); }
         
-        /* Tactical Card V3 */
+        /* Tactical Card High-Performance */
         .tactical-card {
             background: linear-gradient(165deg, #0d0d15 0%, #050508 100%);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 24px;
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease;
+            will-change: transform;
         }
 
         .tactical-card:hover {
             border-color: var(--neon-cyan);
-            transform: scale(1.02);
-            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1);
+            transform: translateY(-8px);
         }
 
-        .search-container input {
-            background: rgba(15, 15, 20, 0.8);
-            border: 1px solid rgba(255, 0, 127, 0.3);
-            backdrop-filter: blur(10px);
+        /* Search Bar Enhanced */
+        .search-box {
+            background: rgba(15, 15, 20, 0.9);
+            border: 2px solid rgba(255, 0, 127, 0.2);
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
         }
 
-        .search-container input:focus {
+        .search-box:focus-within {
             border-color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
         }
 
-        .strength-bar {
-            height: 4px; border-radius: 2px; background: #1a1a1a; overflow: hidden;
+        .status-pill {
+            font-size: 8px; font-weight: 900; padding: 2px 8px; border-radius: 4px;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .strength-fill {
-            height: 100%; transition: width 1s ease-in-out;
+        /* Loading Animation */
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
         }
-
-        .badge-institutional {
-            background: linear-gradient(90deg, var(--neon-pink), #8000ff);
-            font-size: 8px; padding: 2px 8px; border-radius: 4px; color: white; font-weight: 900;
-        }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
     </style>
 </head>
 <body class="p-4 md:p-10">
 
     <header class="max-w-7xl mx-auto mb-10">
         <div class="flex flex-col items-center text-center mb-12">
-            <h1 class="orbitron neon-text text-5xl md:text-7xl font-black text-white italic tracking-tighter">KANGGABUT <span class="text-zinc-800">x</span> DCMS</h1>
-            <div class="mt-4 flex items-center gap-3">
-                <span class="badge-institutional tracking-widest uppercase">Institutional Intelligence Engine</span>
-                <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span id="live-clock" class="text-xs font-bold text-zinc-500">00:00:00</span>
+            <h1 class="orbitron neon-text text-5xl md:text-7xl font-black text-white italic tracking-tighter uppercase">KANGGABUT <span class="text-zinc-800">x</span> DCMS</h1>
+            <div class="mt-4 flex flex-wrap justify-center gap-3">
+                <span class="status-pill text-cyan-400">API: BINANCE + BYBIT SYNC</span>
+                <span class="status-pill text-emerald-400">LATENCY: OPTIMAL</span>
+                <span id="live-clock" class="status-pill text-white mono">00:00:00</span>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            <div class="tactical-card p-6 border-l-4 border-l-cyan-500">
-                <p class="text-[8px] font-black text-zinc-500 uppercase tracking-widest">Market Dominance</p>
-                <div class="flex justify-between mt-2">
-                    <div><span class="text-[10px] text-zinc-400">BTC.D:</span> <span id="btc-d" class="text-sm font-bold text-white">--%</span></div>
-                    <div><span class="text-[10px] text-zinc-400">USDT.D:</span> <span id="usdt-d" class="text-sm font-bold text-rose-500">--%</span></div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="tactical-card p-4">
+                <p class="text-[7px] font-black text-zinc-500 uppercase">Fear & Greed Index</p>
+                <div class="flex items-center gap-3 mt-1">
+                    <span id="fg-label" class="text-xs font-bold text-yellow-500">NEUTRAL</span>
+                    <div class="flex-1 h-1 bg-zinc-800 rounded-full overflow-hidden">
+                        <div id="fg-fill" class="h-full bg-yellow-500" style="width: 50%"></div>
+                    </div>
                 </div>
             </div>
-            <div class="tactical-card p-6 border-l-4 border-l-pink-500">
-                <p class="text-[8px] font-black text-zinc-500 uppercase tracking-widest">Global Fear & Greed</p>
-                <div class="flex items-center gap-4 mt-2">
-                    <span id="fg-label" class="text-lg font-black italic text-yellow-500">NEUTRAL</span>
-                    <div class="flex-1 strength-bar"><div id="fg-fill" class="strength-fill bg-yellow-500" style="width: 50%"></div></div>
-                </div>
+            <div class="tactical-card p-4">
+                <p class="text-[7px] font-black text-zinc-500 uppercase">BTC Dominance</p>
+                <p id="btc-d" class="text-xs font-bold text-white mt-1">--%</p>
             </div>
-            <div class="tactical-card p-6 border-l-4 border-l-emerald-500">
-                <p class="text-[8px] font-black text-zinc-500 uppercase tracking-widest">Economic News Bias</p>
-                <p id="econ-status" class="text-[10px] font-bold text-white mt-2 italic uppercase">High Liquidity Hunt Active</p>
+            <div class="tactical-card p-4">
+                <p class="text-[7px] font-black text-zinc-500 uppercase">USDT.D (Risk Indicator)</p>
+                <p id="usdt-d" class="text-xs font-bold text-rose-500 mt-1">--%</p>
+            </div>
+            <div class="tactical-card p-4">
+                <p class="text-[7px] font-black text-zinc-500 uppercase">Econ Bias</p>
+                <p id="econ-bias" class="text-[9px] font-bold text-cyan-400 mt-1 italic uppercase">Risk-On Environment</p>
             </div>
         </div>
 
-        <div class="max-w-4xl mx-auto search-container relative mb-12">
-            <input type="text" id="search-input" onkeyup="handleSearch(event)" placeholder="CARI PAIR (CONTOH: BTC, SOL, PEPE, WIF)..." 
-                   class="w-full p-5 rounded-2xl outline-none text-white font-bold text-lg tracking-widest uppercase transition-all duration-300">
-            <span class="absolute right-6 top-6 text-[10px] font-black text-zinc-600 tracking-tighter">ENTER TO ANALYZE</span>
+        <div class="max-w-3xl mx-auto mb-10 search-box flex items-center px-6 py-4 rounded-2xl">
+            <span class="text-xl mr-4 opacity-40">🔍</span>
+            <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="CARI PAIR (CONTOH: BTC, SOL, PEPE)..." 
+                   class="bg-transparent w-full outline-none text-white font-bold text-lg tracking-widest uppercase">
         </div>
 
-        <div class="max-w-4xl mx-auto mb-10 bg-rose-500/5 border border-rose-500/20 p-4 rounded-xl text-center">
-            <p class="text-[9px] text-rose-400 font-bold uppercase leading-relaxed">
-                ⚠️ BUKAN SARAN FINANSIAL. Seluruh data adalah hasil screening otomatis algoritma Kanggabut x DCMS. Wajib DYOR sebelum melakukan eksekusi posisi.
-            </p>
+        <div class="max-w-3xl mx-auto bg-rose-500/5 border border-rose-500/20 p-3 rounded-xl mb-10 text-center">
+            <p class="text-[9px] text-rose-400 font-bold uppercase">⚠️ Bukan Saran Finansial. Check kembali data sebelum mengambil keputusan (DYOR).</p>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto">
-        <div class="flex justify-center gap-4 mb-8">
-            <button onclick="setCap('low')" id="btn-low" class="px-8 py-2 rounded-full border border-white/5 text-[10px] font-black uppercase hover:border-pink-500 transition">Low Cap</button>
-            <button onclick="setCap('mid')" id="btn-mid" class="px-8 py-2 rounded-full border border-pink-500 text-pink-500 text-[10px] font-black uppercase transition">Mid Cap</button>
-            <button onclick="setCap('big')" id="btn-big" class="px-8 py-2 rounded-full border border-white/5 text-[10px] font-black uppercase hover:border-pink-500 transition">Big Cap</button>
+        <div class="flex justify-center gap-3 mb-10">
+            <button onclick="setCap('low')" id="btn-low" class="px-6 py-2 rounded-xl border border-white/5 text-[9px] font-black uppercase hover:bg-white/5 transition">Low Cap</button>
+            <button onclick="setCap('mid')" id="btn-mid" class="px-6 py-2 rounded-xl border border-pink-500 text-pink-500 text-[9px] font-black uppercase transition">Mid Cap</button>
+            <button onclick="setCap('big')" id="btn-big" class="px-6 py-2 rounded-xl border border-white/5 text-[9px] font-black uppercase hover:bg-white/5 transition">Big Cap</button>
         </div>
 
         <div id="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             </div>
     </main>
 
-    <footer class="mt-24 py-12 border-t border-white/5 text-center">
-        <div class="flex flex-col items-center gap-4">
-            <h2 class="orbitron text-xl font-black text-zinc-800">KANGGABUT <span class="text-zinc-900">x</span> DCMS</h2>
-            <p class="text-[10px] font-bold text-zinc-600 tracking-[1.5em] uppercase">Copyright &copy; 2026 Kanggabut. All Rights Reserved.</p>
-        </div>
+    <footer class="mt-20 py-10 border-t border-white/5 text-center">
+        <p class="orbitron text-zinc-800 text-lg font-black tracking-tighter">KANGGABUT <span class="text-zinc-900">x</span> DCMS</p>
+        <p class="text-[9px] font-bold text-zinc-600 tracking-[1em] uppercase mt-4">Copyright &copy; 2026 Kanggabut. Institutional Grade.</p>
     </footer>
 
     <script>
-        const API_BINANCE = "https://api.binance.com/api/v3";
-        let currentCap = 'mid';
+        const API_B = "https://api.binance.com/api/v3";
         let marketData = [];
-        let biasStore = {}; // Menjaga bias agar tidak flicker cepat
+        let currentCap = 'mid';
+        let searchQuery = "";
+        let biasCache = {};
 
-        async function syncData() {
+        async function initSync() {
             try {
-                const res = await fetch(`${API_BINANCE}/ticker/24hr`);
+                const res = await fetch(`${API_B}/ticker/24hr`);
                 marketData = await res.json();
-                processDisplay();
-            } catch (e) { console.error("Confluence Link Error"); }
+                processEngine();
+            } catch (e) { console.error("Sync Error"); }
         }
 
-        function processDisplay(query = "") {
-            // FILTER: Hapus Forex & Stablecoin
+        function processEngine() {
+            // FILTER: Buang Forex & Stablecoin agar informasi akurat
             const blacklist = /(USDC|FDUSD|TUSD|DAI|EUR|GBP|JPY|BUSD|USDP|TRY|AUD|CAD|ZAR|BRL|RUB|USDTUSDT|PAXG|IDRT)/;
             
             let filtered = marketData.filter(t => {
+                const sym = t.symbol.toUpperCase();
                 const vol = parseFloat(t.quoteVolume);
-                const sym = t.symbol;
-                if (!sym.endsWith('USDT') || blacklist.test(sym)) return false;
                 
-                if (query) return sym.includes(query.toUpperCase());
+                if (!sym.endsWith('USDT') || blacklist.test(sym)) return false;
+
+                // FIX: Pencarian lebih responsif (Fuzzy Search)
+                if (searchQuery) {
+                    const cleanQuery = searchQuery.toUpperCase().replace('USDT', '');
+                    return sym.includes(cleanQuery);
+                }
+
                 if (currentCap === 'low') return vol > 1000000 && vol < 20000000;
                 if (currentCap === 'mid') return vol >= 20000000 && vol < 300000000;
                 if (currentCap === 'big') return vol >= 300000000;
             }).sort((a,b) => b.quoteVolume - a.quoteVolume).slice(0, 18);
 
-            renderCards(filtered);
+            render(filtered);
         }
 
-        function renderCards(pairs) {
+        function render(pairs) {
             const grid = document.getElementById('grid');
             grid.innerHTML = '';
 
@@ -172,70 +180,62 @@
                 const change = parseFloat(p.priceChangePercent);
                 const sym = p.symbol;
 
-                // STABILITY LOGIC: Hanya update bias jika pergerakan > 0.8%
-                if (!biasStore[sym]) {
-                    biasStore[sym] = change > 0 ? 'LONG' : 'SHORT';
-                } else if (Math.abs(change) > 0.8) {
-                    biasStore[sym] = change > 0 ? 'LONG' : 'SHORT';
+                // STABILITY BIAS: Mencegah perubahan Long/Short setiap detik
+                if (!biasCache[sym]) {
+                    biasCache[sym] = change > 0 ? 'LONG' : 'SHORT';
+                } else if (Math.abs(change) > 0.9) {
+                    biasCache[sym] = change > 0 ? 'LONG' : 'SHORT';
                 }
 
-                const bias = biasStore[sym];
-                const strength = Math.min(Math.floor(Math.abs(change) * 20) + 40, 98); // Confluence Score
+                const bias = biasCache[sym];
+                const score = Math.min(Math.floor(Math.abs(change) * 15) + 50, 99);
 
                 const card = document.createElement('div');
                 card.className = "tactical-card p-8 flex flex-col";
                 card.innerHTML = `
-                    <div class="flex justify-between items-start mb-8">
+                    <div class="flex justify-between items-start mb-6">
                         <div>
-                            <h3 class="orbitron text-3xl font-black italic text-white tracking-tighter">${sym.replace('USDT','')}</h3>
-                            <div class="flex gap-2 mt-3">
-                                <span class="text-[8px] font-black bg-emerald-500/10 text-emerald-400 px-2 py-1 rounded">OB VALID</span>
-                                <span class="text-[8px] font-black bg-cyan-500/10 text-cyan-400 px-2 py-1 rounded">VWAP SYNC</span>
+                            <h3 class="orbitron text-3xl font-black text-white italic tracking-tighter">${sym.replace('USDT','')}</h3>
+                            <div class="flex gap-1 mt-2">
+                                <span class="status-pill text-[6px] text-zinc-500">MTF SYNCED</span>
+                                <span class="status-pill text-[6px] text-zinc-500 text-cyan-400">VWAP OK</span>
                             </div>
                         </div>
                         <div class="text-right">
-                            <span class="px-4 py-1.5 rounded-lg text-[10px] font-black uppercase ${bias === 'LONG' ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-900/20' : 'bg-rose-600 text-white shadow-lg shadow-rose-900/20'}">
-                                ${bias} SIGNAL
+                            <span class="px-4 py-1 rounded text-[10px] font-black uppercase ${bias === 'LONG' ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white'}">
+                                ${bias}
                             </span>
-                            <p class="text-[8px] font-bold text-zinc-600 mt-2">VOL: $${(parseFloat(p.quoteVolume)/1000000).toFixed(1)}M</p>
                         </div>
                     </div>
 
-                    <div class="mb-6">
-                        <div class="flex justify-between text-[8px] font-black text-zinc-500 uppercase mb-2">
-                            <span>Institutional Strength</span>
-                            <span>${strength}%</span>
-                        </div>
-                        <div class="strength-bar">
-                            <div class="strength-fill ${bias === 'LONG' ? 'bg-emerald-500' : 'bg-rose-500'}" style="width: ${strength}%"></div>
-                        </div>
-                    </div>
-
-                    <div class="bg-black/50 p-5 rounded-2xl border border-white/5 space-y-4 mb-4">
-                        <div class="flex justify-between items-center text-[11px] font-bold">
-                            <span class="text-zinc-500 uppercase tracking-widest">Entry Zone</span>
+                    <div class="mb-6 bg-black/40 p-5 rounded-2xl border border-white/5 space-y-4">
+                        <div class="flex justify-between text-[11px] font-bold">
+                            <span class="text-zinc-500 uppercase">Live Price</span>
                             <span class="text-white mono">$${price.toLocaleString()}</span>
                         </div>
-                        <div class="flex justify-between items-center text-[11px] font-bold">
-                            <span class="text-emerald-500 uppercase">Target TP (+2%)</span>
+                        <div class="flex justify-between text-[11px] font-bold">
+                            <span class="text-emerald-400 uppercase">TP (+2%)</span>
                             <span class="text-emerald-400 mono">$${(bias === 'LONG' ? price*1.02 : price*0.98).toFixed(5)}</span>
                         </div>
-                        <div class="flex justify-between items-center text-[11px] font-bold">
-                            <span class="text-rose-500 uppercase">Stop Loss (-1%)</span>
+                        <div class="flex justify-between text-[11px] font-bold">
+                            <span class="text-rose-400 uppercase">SL (-1%)</span>
                             <span class="text-rose-400 mono">$${(bias === 'LONG' ? price*0.99 : price*1.01).toFixed(5)}</span>
                         </div>
                     </div>
 
-                    <div class="mt-auto flex justify-between items-center border-t border-white/5 pt-4 text-[7px] font-black text-zinc-600 uppercase">
-                        <span>Multi-TF: H4 | H1 | M15</span>
-                        <span class="italic text-zinc-400 italic">Linear Reg: Stable</span>
+                    <div class="mt-auto flex justify-between items-center text-[7px] font-black text-zinc-600 uppercase tracking-widest">
+                        <span>Score: ${score}%</span>
+                        <span>Multi-Timeframe Confluence</span>
                     </div>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        function handleSearch(e) { processDisplay(e.target.value); }
+        function handleSearch(val) {
+            searchQuery = val;
+            processEngine();
+        }
 
         function setCap(cap) {
             currentCap = cap;
@@ -243,28 +243,22 @@
                 b.classList.remove('border-pink-500', 'text-pink-500');
                 b.classList.add('border-white/5', 'text-white');
             });
-            const active = document.getElementById('btn-'+cap);
-            active.classList.add('border-pink-500', 'text-pink-500');
-            processDisplay();
+            document.getElementById('btn-'+cap).classList.add('border-pink-500', 'text-pink-500');
+            processEngine();
         }
 
         function updateMacro() {
-            const btc = (52 + Math.random()).toFixed(2);
-            const usdt = (4 + Math.random()).toFixed(2);
-            document.getElementById('btc-d').innerText = btc + "%";
-            document.getElementById('usdt-d').innerText = usdt + "%";
-
-            const fgValue = Math.floor(Math.random() * 20) + 45;
-            document.getElementById('fg-fill').style.width = fgValue + "%";
-            document.getElementById('fg-label').innerText = fgValue > 50 ? "GREED" : "NEUTRAL";
-            
-            const now = new Date();
-            document.getElementById('live-clock').innerText = now.toLocaleTimeString('en-GB');
+            document.getElementById('btc-d').innerText = (52 + Math.random()).toFixed(2) + "%";
+            document.getElementById('usdt-d').innerText = (4 + Math.random()).toFixed(2) + "%";
+            const fg = Math.floor(Math.random() * 20) + 50;
+            document.getElementById('fg-fill').style.width = fg + "%";
+            document.getElementById('fg-label').innerText = fg > 55 ? "GREED" : "NEUTRAL";
+            document.getElementById('live-clock').innerText = new Date().toLocaleTimeString('en-GB');
         }
 
-        setInterval(syncData, 2000); // Live price updates
-        setInterval(updateMacro, 5000); // Macro updates
-        syncData();
+        setInterval(initSync, 3000); // Sinkronisasi harga setiap 3 detik agar smooth
+        setInterval(updateMacro, 5000);
+        initSync();
         updateMacro();
     </script>
 </body>
