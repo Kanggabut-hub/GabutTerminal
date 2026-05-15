@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KANGGABUT x DCMS | CRYPTO TERMINAL</title>
+    <title>KANGGABUT x DCMS | ULTIMATE TERMINAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #06070a;
-            --card-bg: rgba(13, 17, 23, 0.7);
-            --brand-primary: #00e5ff;
-            --brand-secondary: #7000ff;
+            --bg: #030406;
+            --card-bg: rgba(10, 14, 20, 0.85);
+            --cyan: #00f2ff;
+            --blue: #3b82f6;
             --pink: #ff2d75;
         }
 
@@ -19,144 +19,156 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg);
             background-image: 
-                radial-gradient(circle at 0% 0%, rgba(112, 0, 255, 0.08) 0px, transparent 50%),
-                radial-gradient(circle at 100% 100%, rgba(0, 229, 255, 0.08) 0px, transparent 50%);
-            color: #e2e8f0;
-            min-height: 100vh;
+                radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.03) 0px, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(0, 242, 255, 0.03) 0px, transparent 40%);
+            color: #f1f5f9; min-height: 100vh; overflow-x: hidden;
+        }
+
+        /* Branding Name Styling */
+        .brand-logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+            font-style: italic;
+            position: relative;
+            display: inline-block;
+        }
+
+        .brand-glow {
+            background: linear-gradient(135deg, #fff 0%, #3b82f6 50%, #00f2ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.4));
+        }
+
+        .brand-sub {
+            letter-spacing: 0.8em;
+            font-weight: 800;
+            color: #475569;
+            font-size: 9px;
+            margin-top: -5px;
+            text-transform: uppercase;
         }
 
         .glass-card {
             background: var(--card-bg);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
             border: 1px solid rgba(255, 255, 255, 0.03);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             border-left: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .glass-card:hover {
-            border-color: var(--brand-primary);
-            transform: translateY(-6px);
-            box-shadow: 0 25px 50px rgba(0, 229, 255, 0.1);
+            border-color: var(--cyan);
+            transform: translateY(-8px);
+            box-shadow: 0 35px 70px rgba(0, 242, 255, 0.1);
         }
 
         .search-bar {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            color: white;
+            transition: all 0.3s;
         }
 
         .search-bar:focus {
             outline: none;
-            border-color: var(--brand-primary);
-            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--blue);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
         }
-
-        .session-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
-        .active-dot { background: var(--brand-primary); box-shadow: 0 0 10px var(--brand-primary); }
-        .inactive-dot { background: #334155; }
 
         .mono { font-family: 'JetBrains Mono', monospace; }
         
-        .dcms-gradient {
-            background: linear-gradient(90deg, var(--brand-primary), var(--brand-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .pill-active {
+            background: rgba(0, 242, 255, 0.08);
+            color: var(--cyan);
+            border: 1px solid rgba(0, 242, 255, 0.2);
         }
 
-        @keyframes pulse-ring { 0% { transform: scale(0.8); opacity: 0.5; } 100% { transform: scale(1.3); opacity: 0; } }
-        .live-ring { position: relative; }
-        .live-ring::before { content: ''; position: absolute; width: 100%; height: 100%; background: var(--brand-primary); border-radius: 50%; animation: pulse-ring 2s infinite; }
+        @keyframes pulse-dot { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        .live-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; animation: pulse-dot 1.5s infinite; }
     </style>
 </head>
-<body class="p-4 md:p-10">
+<body class="p-4 md:p-12">
 
-    <header class="max-w-7xl mx-auto mb-10">
-        <div class="flex flex-col lg:flex-row justify-between items-center gap-8">
-            <div class="text-center lg:text-left">
-                <h1 class="text-4xl font-black tracking-tighter uppercase italic">
-                    KANGGABUT <span class="text-zinc-500 font-light">x</span> <span class="dcms-gradient">DCMS</span>
-                </h1>
-                <p class="text-[10px] tracking-[0.6em] font-bold text-zinc-500 uppercase mt-2 italic">Institutional Crypto Terminal</p>
-            </div>
-
-            <div class="flex flex-wrap justify-center gap-4 bg-white/5 p-4 rounded-3xl border border-white/5 backdrop-blur-md">
-                <div class="flex items-center px-3 border-r border-white/10">
-                    <span id="dot-crypto" class="session-dot active-dot"></span>
-                    <span class="text-[10px] font-black uppercase tracking-widest text-zinc-400">Crypto Live</span>
-                </div>
-                <div class="flex items-center px-3">
-                    <p id="clock" class="mono text-sm font-bold text-white">00:00:00</p>
-                </div>
-                <div class="hidden md:block px-3 border-l border-white/10">
-                    <p class="text-[9px] text-zinc-500 uppercase font-black">Sentiment</p>
-                    <p id="sentiment" class="text-[10px] text-cyan-400 font-bold uppercase italic">Analyzing...</p>
+    <header class="max-w-7xl mx-auto mb-16 flex flex-col md:flex-row justify-between items-center gap-10">
+        <div class="text-center md:text-left">
+            <h1 class="brand-logo brand-glow">KANGGABUT <span class="font-thin text-white/20 px-1">X</span> DCMS</h1>
+            <div class="brand-sub">INSTITUTIONAL LIQUIDITY ENGINE</div>
+        </div>
+        
+        <div class="flex items-center gap-8 bg-white/[0.02] p-5 rounded-3xl border border-white/5 backdrop-blur-xl">
+            <div class="text-center px-4 border-r border-white/10">
+                <p class="text-[7px] text-zinc-500 uppercase font-black tracking-widest">Protocol Status</p>
+                <div class="flex items-center gap-2 mt-1">
+                    <div class="live-dot"></div>
+                    <p class="text-[10px] font-bold text-white tracking-tighter uppercase">Market Active</p>
                 </div>
             </div>
+            <p id="clock" class="mono text-sm font-bold text-slate-400">00:00:00</p>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-            <input type="text" id="searchInput" placeholder="Search Pairs (e.g. BTC, PEPE, SOL)..." 
-                   class="search-bar col-span-1 md:col-span-2 px-6 py-4 rounded-2xl text-sm font-semibold transition-all">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-12">
+            <input type="text" id="searchInput" placeholder="Search Altcoin Asset..." 
+                   class="search-bar col-span-1 lg:col-span-3 px-8 py-5 text-sm font-medium tracking-wide">
             
-            <div class="flex p-1 bg-white/5 rounded-2xl border border-white/5">
-                <button onclick="setCap('low')" id="cap-low" class="flex-1 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest text-zinc-500 hover:text-white">Low</button>
-                <button onclick="setCap('mid')" id="cap-mid" class="flex-1 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest text-zinc-500 hover:text-white">Mid</button>
-                <button onclick="setCap('big')" id="cap-big" class="flex-1 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest text-zinc-500 hover:text-white">Big</button>
+            <div class="flex p-1.5 bg-white/[0.03] rounded-2xl border border-white/5">
+                <button onclick="setCap('low')" id="cap-low" class="flex-1 py-2.5 rounded-xl text-[9px] font-black uppercase text-zinc-500 transition-all">Low</button>
+                <button onclick="setCap('mid')" id="cap-mid" class="flex-1 py-2.5 rounded-xl text-[9px] font-black uppercase text-zinc-500 transition-all">Mid</button>
+                <button onclick="setCap('big')" id="cap-big" class="flex-1 py-2.5 rounded-xl text-[9px] font-black uppercase text-zinc-500 transition-all">Big</button>
             </div>
         </div>
 
         <div id="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            </div>
+            <div class="col-span-full py-40 text-center opacity-20 text-[10px] mono tracking-[1em] uppercase">Scoping Market Liquidity...</div>
+        </div>
     </main>
 
     <script>
         const API = "https://api.binance.com/api/v3";
         let currentCap = 'mid';
-        let marketData = [];
+        let allData = [];
 
-        // Clock & Sentiment Logic
+        // Clock System
         setInterval(() => {
             document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-GB');
         }, 1000);
 
-        function updateSentiment() {
-            const list = ["Risk-On Mode", "Accumulation Phase", "Whale Move Detected", "Smart Money Entry"];
-            document.getElementById('sentiment').innerText = list[Math.floor(Math.random() * list.length)];
-        }
-        updateSentiment();
-        setInterval(updateSentiment, 60000);
-
-        async function fetchCrypto() {
+        async function fetchMarket() {
             try {
                 const res = await fetch(`${API}/ticker/24hr`);
                 const data = await res.json();
                 
-                // EXCLUSIVE CRYPTO FILTER (No Forex, No Stables)
-                const cryptoPairs = data.filter(t => {
-                    const symbol = t.symbol;
+                // NO STABLES - NO FIAT - NO FOREX
+                const forbidden = /(USDC|FDUSD|TUSD|DAI|USDP|EUR|GBP|JPY|AUD|CAD|TRY|BRL|ZAR|RUB|AEUR|PAXG|BUSD)/;
+
+                const filtered = data.filter(t => {
                     const vol = parseFloat(t.quoteVolume);
-                    const isUSDT = symbol.endsWith('USDT');
-                    const isStable = /(USDC|FDUSD|DAI|TUSD|USDP|EUR|GBP|JPY)/.test(symbol);
+                    const isUSDT = t.symbol.endsWith('USDT');
+                    const name = t.symbol.replace('USDT', '');
                     
-                    if (!isUSDT || isStable) return false;
+                    if (!isUSDT || forbidden.test(t.symbol) || name === "USDT") return false;
 
-                    if (currentCap === 'low') return vol > 1000000 && vol < 20000000;
-                    if (currentCap === 'mid') return vol >= 20000000 && vol < 250000000;
-                    if (currentCap === 'big') return vol >= 250000000;
-                }).sort((a,b) => b.quoteVolume - a.quoteVolume).slice(0, 28);
+                    if (currentCap === 'low') return vol > 500000 && vol < 15000000;
+                    if (currentCap === 'mid') return vol >= 15000000 && vol < 200000000;
+                    if (currentCap === 'big') return vol >= 200000000;
+                }).sort((a,b) => b.quoteVolume - a.quoteVolume).slice(0, 32);
 
-                marketData = await Promise.all(cryptoPairs.map(async (p) => {
-                    const cRes = await fetch(`${API}/klines?symbol=${p.symbol}&interval=1h&limit=30`);
+                allData = await Promise.all(filtered.map(async (p) => {
+                    const cRes = await fetch(`${API}/klines?symbol=${p.symbol}&interval=1h&limit=24`);
                     const candles = await cRes.json();
                     return { p, candles };
                 }));
                 render();
-            } catch (e) { console.error("Crypto Engine Offline"); }
+            } catch (e) { console.error("Link Failure"); }
         }
 
         function render() {
@@ -164,7 +176,7 @@
             const search = document.getElementById('searchInput').value.toUpperCase();
             grid.innerHTML = '';
 
-            const filtered = marketData.filter(d => d.p.symbol.includes(search));
+            const filtered = allData.filter(d => d.p.symbol.includes(search));
 
             filtered.forEach(({p, candles}) => {
                 const price = parseFloat(p.lastPrice);
@@ -174,49 +186,46 @@
                 const sl = isLong ? price * 0.98 : price * 1.02;
 
                 const card = document.createElement('div');
-                card.className = "glass-card p-7 flex flex-col h-full";
+                card.className = "glass-card p-8 flex flex-col h-full";
                 card.innerHTML = `
                     <div class="flex justify-between items-start mb-8">
                         <div>
-                            <div class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-cyan-400 live-ring"></span>
-                                <h3 class="text-2xl font-black tracking-tighter text-white uppercase">${p.symbol.replace('USDT','')}</h3>
-                            </div>
-                            <p class="text-[9px] font-bold text-zinc-500 tracking-widest mt-1 uppercase">Binance Futures</p>
+                            <h3 class="text-2xl font-extrabold tracking-tighter text-white uppercase">${p.symbol.replace('USDT','')}</h3>
+                            <p class="text-[8px] font-black text-blue-500/60 tracking-[0.2em] mt-1 uppercase">Crypto Asset</p>
                         </div>
                         <div class="text-right">
-                            <span class="px-3 py-1 rounded-lg text-[10px] font-black border ${isLong ? 'border-cyan-500/30 text-cyan-400 bg-cyan-500/5' : 'border-pink-500/30 text-pink-400 bg-pink-500/5'}">
-                                ${isLong ? 'LONG' : 'SHORT'}
+                            <span class="px-3 py-1 rounded-lg text-[9px] font-black border ${isLong ? 'border-emerald-500/20 text-emerald-400 bg-emerald-400/5' : 'border-pink-500/20 text-pink-400 bg-pink-500/5'}">
+                                ${isLong ? 'BUY_SIDE' : 'SELL_SIDE'}
                             </span>
-                            <p class="text-[10px] font-bold mono mt-2 ${change >= 0 ? 'text-emerald-400' : 'text-rose-500'}">${change}%</p>
+                            <p class="text-[10px] font-bold mono mt-2 ${change >= 0 ? 'text-emerald-400' : 'text-pink-500'}">${change}%</p>
                         </div>
                     </div>
 
                     <div class="space-y-5">
                         <div class="flex justify-between items-center border-b border-white/5 pb-3">
-                            <span class="text-[9px] font-bold text-zinc-500 uppercase">Entry Price</span>
-                            <span class="text-sm font-bold mono italic">$${price.toLocaleString()}</span>
+                            <span class="text-[8px] font-bold text-zinc-600 uppercase tracking-widest">Entry Price</span>
+                            <span class="text-xs font-bold mono italic tracking-tighter text-white">$${price.toLocaleString()}</span>
                         </div>
                         
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-cyan-500/5 p-4 rounded-2xl border border-cyan-500/10">
-                                <p class="text-[8px] font-black text-cyan-500 uppercase mb-1">Take Profit</p>
-                                <p class="text-[11px] font-bold text-white mono">${tp.toFixed(5)}</p>
+                        <div class="grid grid-cols-2 gap-4 pt-2">
+                            <div class="bg-emerald-500/[0.03] p-4 rounded-2xl border border-emerald-500/10">
+                                <p class="text-[7px] font-black text-emerald-500 uppercase mb-1 tracking-widest">Target TP</p>
+                                <p class="text-[10px] font-bold text-white mono">${tp.toFixed(5)}</p>
                             </div>
-                            <div class="bg-pink-500/5 p-4 rounded-2xl border border-pink-500/10 text-right">
-                                <p class="text-[8px] font-black text-pink-500 uppercase mb-1">Stop Loss</p>
-                                <p class="text-[11px] font-bold text-white mono">${sl.toFixed(5)}</p>
+                            <div class="bg-pink-500/[0.03] p-4 rounded-2xl border border-pink-500/10 text-right">
+                                <p class="text-[7px] font-black text-pink-500 uppercase mb-1 tracking-widest">Stop Loss</p>
+                                <p class="text-[10px] font-bold text-white mono">${sl.toFixed(5)}</p>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="pt-4">
-                            <div class="flex justify-between text-[8px] font-black uppercase text-zinc-600 mb-2">
-                                <span>Volatility Strength</span>
-                                <span>SMC Confirmed</span>
-                            </div>
-                            <div class="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-blue-600 to-cyan-400" style="width: ${Math.min(Math.abs(change)*10, 100)}%"></div>
-                            </div>
+                    <div class="mt-auto pt-10">
+                        <div class="flex justify-between text-[8px] font-black uppercase text-zinc-700 mb-2">
+                            <span>SMC Confirmation</span>
+                            <span class="text-zinc-500 tracking-tighter">$${(parseFloat(p.quoteVolume)/1000000).toFixed(1)}M VOL</span>
+                        </div>
+                        <div class="h-[2px] w-full bg-white/5 rounded-full overflow-hidden">
+                            <div class="h-full bg-blue-600 transition-all duration-1000" style="width: ${Math.min(Math.abs(change)*10, 100)}%"></div>
                         </div>
                     </div>
                 `;
@@ -226,19 +235,16 @@
 
         function setCap(cap) {
             currentCap = cap;
-            document.querySelectorAll('button[id^="cap-"]').forEach(b => {
-                b.classList.remove('bg-cyan-400/10', 'text-cyan-400', 'border', 'border-cyan-400/20');
-            });
-            const activeBtn = document.getElementById('cap-'+cap);
-            activeBtn.classList.add('bg-cyan-400/10', 'text-cyan-400', 'border', 'border-cyan-400/20');
-            fetchCrypto();
+            document.querySelectorAll('button[id^="cap-"]').forEach(b => b.className = "flex-1 py-2.5 rounded-xl text-[9px] font-black uppercase text-zinc-500 transition-all");
+            document.getElementById('cap-'+cap).classList.add('pill-active');
+            fetchMarket();
         }
 
         document.getElementById('searchInput').addEventListener('input', render);
         
-        // Init
+        // Boot Engine
         setCap('mid');
-        setInterval(fetchCrypto, 60000);
+        setInterval(fetchMarket, 60000);
     </script>
 </body>
 </html>
