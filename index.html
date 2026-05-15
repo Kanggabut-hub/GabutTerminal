@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KANGGABUT TERMINAL | SMC V9</title>
+    <title>KANGGABUT TERMINAL | V10 SNIPER</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
     <style>
@@ -18,57 +18,75 @@
         }
         .card-3d {
             background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            border-left: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 28px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+            transition: all 0.4s ease;
         }
-        .card-3d:hover { border-color: var(--cyan); transform: translateY(-5px); }
-        .tag { font-size: 8px; font-weight: 800; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; }
+        .card-3d:hover { border-color: var(--cyan); transform: translateY(-8px); box-shadow: 0 30px 60px rgba(0, 242, 255, 0.1); }
+        .tag { font-size: 8px; font-weight: 900; padding: 2px 8px; border-radius: 6px; text-transform: uppercase; }
         .ob-bullish { background: rgba(0, 242, 255, 0.1); color: var(--cyan); border: 1px solid var(--cyan); }
         .ob-bearish { background: rgba(255, 0, 122, 0.1); color: var(--pink); border: 1px solid var(--pink); }
         .mono { font-family: 'JetBrains Mono', monospace; }
+        .shimmer { animation: shimmer 2s infinite; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent); background-size: 200% 100%; }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
     </style>
 </head>
 <body class="p-4 md:p-10">
 
-    <header class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
+    <header class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
         <div>
-            <h1 class="text-3xl font-black tracking-tighter">KANGGABUT<span class="text-cyan-400">V9</span></h1>
-            <p class="text-[9px] tracking-[0.6em] uppercase font-bold text-zinc-500">Kegabutan Sumber Cuan <span class="text-white italic">/ SMC Engine</span></p>
-        </div>
-        <div class="flex gap-4 items-center glass p-2 px-4 rounded-2xl bg-white/5 border border-white/10">
-            <div class="text-center">
-                <p class="text-[7px] text-zinc-500 uppercase font-black">Data Stream</p>
-                <p class="text-[10px] font-bold text-emerald-400">REALTIME_SMC</p>
+            <h1 class="text-3xl font-black tracking-tighter">KANGGABUT<span class="text-cyan-400 italic">V10</span></h1>
+            <p class="text-[9px] tracking-[0.5em] uppercase font-bold text-zinc-500 mt-1">Mid-Low Cap Sniper Engine</p>
+            <div class="flex gap-2 mt-2">
+                <span class="text-[8px] px-2 py-0.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded font-bold">STABLE_COINS_BLOCKED</span>
+                <span class="text-[8px] px-2 py-0.5 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded font-bold">ALT_ONLY</span>
             </div>
-            <div class="w-px h-6 bg-white/10"></div>
-            <div id="clock" class="mono text-xs font-bold tracking-tighter">00:00:00</div>
+        </div>
+        <div class="glass p-3 px-6 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-6">
+            <div class="text-center">
+                <p class="text-[7px] text-zinc-500 uppercase font-black">Sync Mode</p>
+                <p class="text-[10px] font-bold text-cyan-400">SMART_MONEY_SMC</p>
+            </div>
+            <div class="w-px h-8 bg-white/10"></div>
+            <p id="clock" class="mono text-sm font-bold">00:00:00</p>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto">
-        <div id="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <div class="col-span-full py-20 text-center">
-                <div class="inline-block w-8 h-8 border-2 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin mb-4"></div>
-                <p class="mono text-[10px] text-zinc-500 tracking-[0.3em] uppercase">Scanning Supply & Demand Zones...</p>
+        <div id="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <div class="col-span-full py-32 text-center">
+                <div class="w-10 h-10 border-2 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin inline-block mb-4"></div>
+                <p class="mono text-[10px] text-zinc-500 tracking-[0.3em] uppercase animate-pulse">Filtering Mid-Low Cap Pairs...</p>
             </div>
         </div>
     </main>
 
     <script>
         const BINANCE = "https://api.binance.com/api/v3";
+        // Blacklist Koin Stabil & Besar
+        const BLACKLIST = ["USDT", "USDC", "BUSD", "FDUSD", "TUSD", "DAI", "BTC", "ETH", "BNB", "SOL", "XRP"];
 
-        async function initSMC() {
+        async function initSniper() {
             try {
                 const res = await fetch(`${BINANCE}/ticker/24hr`);
                 const tickers = await res.json();
-                const pairs = tickers.filter(t => t.symbol.endsWith('USDT'))
-                                     .sort((a, b) => b.quoteVolume - a.quoteVolume)
-                                     .slice(0, 20);
+                
+                // Filter Mid to Low Market Cap (Berdasarkan Volume)
+                const pairs = tickers.filter(t => {
+                    const symbol = t.symbol;
+                    const volume = parseFloat(t.quoteVolume);
+                    const isUSDT = symbol.endsWith('USDT');
+                    const name = symbol.replace('USDT', '');
+                    
+                    // Filter: Harus USDT, Tidak di Blacklist, Volume antara $10M - $150M (Mid-Low Cap)
+                    return isUSDT && !BLACKLIST.includes(name) && volume > 10000000 && volume < 150000000;
+                })
+                .sort((a, b) => parseFloat(b.priceChangePercent) - parseFloat(a.priceChangePercent))
+                .slice(0, 24);
 
                 const signals = await Promise.all(pairs.map(async (p) => {
                     const cRes = await fetch(`${BINANCE}/klines?symbol=${p.symbol}&interval=1h&limit=50`);
@@ -77,35 +95,28 @@
                 }));
 
                 render(signals);
-            } catch (err) { console.error("SMC Engine Error"); }
+            } catch (err) { console.error("Sniper Engine Error"); }
         }
 
         function analyzeSMC(candles) {
             const data = candles.map(c => ({
-                open: parseFloat(c[1]), high: parseFloat(c[2]), 
-                low: parseFloat(c[3]), close: parseFloat(c[4]), vol: parseFloat(c[5])
+                high: parseFloat(c[2]), low: parseFloat(c[3]), close: parseFloat(c[4]), vol: parseFloat(c[5])
             }));
-
-            // Simple Order Block Detection
-            // Bullish OB: Last down candle before an impulsive move up
-            let obZone = "Neutral";
-            let type = "NEUTRAL";
-            
             const last = data[data.length - 1];
             const prev = data[data.length - 2];
-
-            if(last.close > prev.high) {
-                obZone = "Demand / Bullish OB";
+            
+            // POC (Point of Control) - Volume Profile
+            const poc = data.reduce((max, c) => c.vol > max.vol ? c : max, data[0]).close;
+            
+            let type = "SHORT";
+            let obZone = "Supply / Bearish OB";
+            
+            if(last.close > poc) {
                 type = "LONG";
-            } else if (last.close < prev.low) {
-                obZone = "Supply / Bearish OB";
-                type = "SHORT";
+                obZone = "Demand / Bullish OB";
             }
 
-            // Volume Profile (POC - Point of Control)
-            const poc = data.reduce((max, c) => c.vol > max.vol ? c : max, data[0]).close;
-
-            return { obZone, type, poc };
+            return { type, obZone, poc };
         }
 
         function render(data) {
@@ -117,58 +128,59 @@
                 const price = parseFloat(p.lastPrice);
                 const isLong = smc.type === 'LONG';
                 
-                // Risk Management 2%
                 const sl = isLong ? price * 0.98 : price * 1.02;
                 const tp = isLong ? price * 1.02 : price * 0.98;
-                
-                // Leverage Recommendation
-                const lev = Math.abs(parseFloat(p.priceChangePercent)) > 4 ? "10-25x" : "50-125x";
+                const change = parseFloat(p.priceChangePercent);
 
                 const card = document.createElement('div');
-                card.className = "card-3d p-6 flex flex-col justify-between relative overflow-hidden";
+                card.className = "card-3d p-7 flex flex-col justify-between relative overflow-hidden shimmer";
                 card.innerHTML = `
-                    <div class="mb-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-black tracking-tighter italic uppercase">${p.symbol.replace('USDT','')}</h3>
+                    <div class="mb-8">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <h3 class="text-2xl font-black tracking-tighter uppercase text-white">${p.symbol.replace('USDT','')}</h3>
+                                <p class="text-[9px] text-zinc-500 font-bold tracking-[0.2em] mt-1 italic">Mid-Low Segment</p>
+                            </div>
                             <span class="tag ${isLong ? 'ob-bullish' : 'ob-bearish'}">${smc.type}</span>
                         </div>
                         <div class="flex gap-2">
-                            <span class="text-[8px] bg-white/5 border border-white/10 px-2 py-0.5 rounded text-zinc-400 font-bold uppercase">OB: ${smc.obZone}</span>
+                            <span class="text-[8px] bg-white/5 border border-white/10 px-2 py-0.5 rounded text-cyan-400 font-bold">${smc.obZone}</span>
                         </div>
                     </div>
 
-                    <div class="space-y-4 mb-6">
-                        <div class="flex justify-between items-end border-b border-white/5 pb-2">
+                    <div class="space-y-5 mb-8">
+                        <div class="flex justify-between items-end border-b border-white/5 pb-3">
                             <div>
-                                <p class="text-[8px] text-zinc-500 uppercase font-black mb-1 italic">Market Entry</p>
-                                <p class="text-sm font-bold mono">$${price.toLocaleString()}</p>
+                                <p class="text-[8px] text-zinc-500 uppercase font-black mb-1">Entry Price</p>
+                                <p class="text-sm font-bold mono tracking-tighter italic">$${price.toLocaleString()}</p>
                             </div>
                             <div class="text-right">
-                                <p class="text-[8px] text-zinc-500 uppercase font-black mb-1 italic">Volume POC</p>
+                                <p class="text-[8px] text-zinc-500 uppercase font-black mb-1">POC Volume</p>
                                 <p class="text-[10px] font-bold text-blue-400 mono italic">$${smc.poc.toLocaleString()}</p>
                             </div>
                         </div>
 
                         <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-emerald-500/5 p-3 rounded-xl border border-emerald-500/20">
-                                <p class="text-[7px] text-emerald-500 uppercase font-black mb-1">Take Profit (2%)</p>
-                                <p class="text-[10px] font-bold text-white mono">${tp.toFixed(5)}</p>
+                            <div class="bg-emerald-500/5 p-3 rounded-2xl border border-emerald-500/20">
+                                <p class="text-[7px] text-emerald-500 uppercase font-black mb-1">TP (2%)</p>
+                                <p class="text-[11px] font-bold text-white mono tracking-tighter">${tp.toFixed(5)}</p>
                             </div>
-                            <div class="bg-pink-500/5 p-3 rounded-xl border border-pink-500/20 text-right">
-                                <p class="text-[7px] text-pink-500 uppercase font-black mb-1 text-right">Stop Loss (2%)</p>
-                                <p class="text-[10px] font-bold text-white mono">${sl.toFixed(5)}</p>
+                            <div class="bg-pink-500/5 p-3 rounded-2xl border border-pink-500/20 text-right">
+                                <p class="text-[7px] text-pink-500 uppercase font-black mb-1">SL (2%)</p>
+                                <p class="text-[11px] font-bold text-white mono tracking-tighter">${sl.toFixed(5)}</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="mt-auto">
-                        <div class="flex justify-between items-center text-[9px] font-bold uppercase tracking-widest mb-2">
-                            <span class="text-zinc-600 italic">Smart Leverage</span>
-                            <span class="text-cyan-400">${lev}</span>
+                        <div class="flex justify-between items-center text-[9px] font-bold uppercase tracking-[0.2em] mb-2">
+                            <span class="text-zinc-500 italic">24h Vol: $${(parseFloat(p.quoteVolume)/1000000).toFixed(1)}M</span>
+                            <span class="${change >= 0 ? 'text-emerald-400' : 'text-pink-400'}">${change}%</span>
                         </div>
                         <div class="h-[2px] w-full bg-white/5 rounded-full overflow-hidden">
-                            <div class="h-full bg-gradient-to-r from-blue-600 to-cyan-400 transition-all duration-1000" style="width: ${Math.random()*100}%"></div>
+                            <div class="h-full bg-gradient-to-r from-blue-600 to-cyan-400 transition-all duration-1000" style="width: ${Math.abs(change) * 5}%"></div>
                         </div>
+                        <p class="text-[8px] text-zinc-600 mt-3 font-bold uppercase text-center tracking-widest">Recommended Leverage: 20x - 50x</p>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -179,8 +191,8 @@
             document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-GB');
         }, 1000);
 
-        initSMC();
-        setInterval(initSMC, 60000);
+        initSniper();
+        setInterval(initSniper, 60000);
     </script>
 </body>
 </html>
