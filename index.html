@@ -5,178 +5,184 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KANGGABUT TERMINAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
-        :root { --accent: #00ffcc; --bg: #000000; }
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #000;
             color: #fff;
+            min-height: 100vh;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
         }
         .mesh-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% -20%, #112244, transparent),
-                        radial-gradient(circle at 100% 100%, #0a0a0a, transparent);
+            background: radial-gradient(circle at 10% 20%, #111 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, #0a0a0a 0%, transparent 40%);
             z-index: -1;
         }
         .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 32px;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
         .glass-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: var(--accent);
+            border-color: rgba(0, 255, 204, 0.3);
             transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.04);
         }
         .mono { font-family: 'JetBrains Mono', monospace; }
-        .stagger-load { animation: fadeInUp 0.6s both; }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .shimmer {
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            background-size: 200% 100%;
-            animation: shimmer 2s infinite;
-        }
-        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        .neon-text { text-shadow: 0 0 15px rgba(0, 255, 204, 0.4); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .stagger { animation: fadeIn 0.5s ease-out both; }
     </style>
 </head>
-<body class="p-6 md:p-12">
+<body class="p-6">
     <div class="mesh-bg"></div>
 
-    <!-- Minimalist Header -->
-    <header class="max-w-6xl mx-auto flex justify-between items-end mb-16">
+    <!-- Header -->
+    <header class="max-w-6xl mx-auto flex justify-between items-center mb-12 mt-4">
         <div>
-            <h1 class="text-4xl font-extrabold tracking-tighter mb-2 italic">KANGGABUT<span class="text-zinc-500 italic">.TERMINAL</span></h1>
-            <div class="flex items-center gap-4 text-[10px] uppercase tracking-[0.4em] text-zinc-400 font-semibold">
-                <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></span> Live Node</span>
-                <span class="opacity-30">|</span>
-                <span>Bitunix Engine 4.0</span>
-            </div>
+            <h1 class="text-3xl font-extrabold tracking-tighter neon-text">KANGGABUT<span class="text-zinc-500 font-light">TERMINAL</span></h1>
+            <p class="text-[10px] uppercase tracking-[0.5em] text-emerald-400 font-bold mt-1">Kegabutan sumber cuan</p>
         </div>
-        <div class="text-right hidden md:block">
-            <p id="clock" class="text-xl font-light mono tracking-tighter">00:00:00</p>
-            <p class="text-[9px] text-zinc-600 uppercase tracking-widest mt-1">Global Market Sync</p>
+        <div class="text-right">
+            <div id="status" class="flex items-center gap-2 text-[9px] font-bold text-zinc-500 uppercase">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                Engine Active
+            </div>
+            <p id="clock" class="text-sm font-light mono mt-1">00:00:00</p>
         </div>
     </header>
 
-    <!-- Main Engine -->
+    <!-- Main Section -->
     <main class="max-w-6xl mx-auto">
-        <div id="loading-state" class="flex flex-col items-center justify-center py-32 space-y-4">
-            <div class="w-12 h-12 border-t-2 border-emerald-500 rounded-full animate-spin"></div>
-            <p class="text-xs uppercase tracking-[0.3em] text-zinc-500 font-mono">Parallel Syncing...</p>
+        <div id="loading" class="flex flex-col items-center justify-center py-24 gap-4">
+            <div class="w-8 h-8 border-2 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin"></div>
+            <p class="text-[10px] mono text-zinc-600 tracking-widest uppercase">Fetching Market Signals...</p>
         </div>
 
-        <div id="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Dynamic Content -->
+        <div id="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- Cards will be injected here -->
         </div>
     </main>
 
     <script>
-        const API = "https://api.bitunix.com/api/v1/market";
+        const API_URL = "https://api.bitunix.com/api/v1/market";
 
-        async function init() {
+        async function startEngine() {
             try {
-                const response = await fetch(`${API}/tickers`);
-                const result = await response.json();
+                // Step 1: Ambil semua ticker sekaligus
+                const tickerResp = await fetch(`${API_URL}/tickers`);
+                const tickerData = await tickerResp.json();
                 
-                // Ambil Top 20 berdasarkan Volume
-                const pairs = result.data
+                // Ambil 30 pair volume tertinggi agar pilihan lebih banyak
+                const pairs = tickerData.data
                     .filter(p => p.symbol.endsWith('USDT'))
                     .sort((a, b) => b.quoteVolume - a.quoteVolume)
-                    .slice(0, 15);
+                    .slice(0, 30);
 
-                // PARALLEL FETCHING: Mengambil semua data candle secara bersamaan
-                const candlePromises = pairs.map(p => 
-                    fetch(`${API}/candles?symbol=${p.symbol}&interval=1h&limit=20`)
-                    .then(res => res.json())
-                    .then(data => ({ symbol: p.symbol, price: p.last, data: data.data }))
+                // Step 2: Parallel Fetching (Ini yang membuat cepat)
+                const results = await Promise.allSettled(
+                    pairs.map(p => 
+                        fetch(`${API_URL}/candles?symbol=${p.symbol}&interval=1h&limit=20`)
+                        .then(res => res.json())
+                        .then(candles => ({
+                            symbol: p.symbol,
+                            price: p.last,
+                            candles: candles.data
+                        }))
+                    )
                 );
 
-                const results = await Promise.all(candlePromises);
                 render(results);
-
             } catch (err) {
-                console.error("Link Error");
+                console.error("API Error:", err);
             }
         }
 
-        function calculateRSI(data) {
-            if (!data || data.length < 14) return 50;
-            const closes = data.map(k => parseFloat(k.close)).reverse();
-            let up = 0, down = 0;
+        function calculateRSI(candles) {
+            if (!candles || candles.length < 14) return 50;
+            const prices = candles.map(c => parseFloat(c.close)).reverse();
+            let gains = 0, losses = 0;
             for (let i = 1; i < 15; i++) {
-                let diff = closes[i] - closes[i-1];
-                if (diff >= 0) up += diff; else down -= diff;
+                let diff = prices[i] - prices[i-1];
+                if (diff >= 0) gains += diff; else losses -= diff;
             }
-            return 100 - (100 / (1 + (up / (down || 1))));
+            return 100 - (100 / (1 + (gains / (losses || 1))));
         }
 
-        function render(items) {
+        function render(results) {
             const grid = document.getElementById('grid');
-            const loading = document.getElementById('loading-state');
-            loading.classList.add('hidden');
+            const loading = document.getElementById('loading');
             grid.innerHTML = '';
+            loading.classList.add('hidden');
 
-            items.forEach((item, index) => {
-                const rsi = calculateRSI(item.data);
-                const price = parseFloat(item.price);
-                let signal = null;
+            results.forEach((res, i) => {
+                if (res.status === 'fulfilled' && res.value.candles) {
+                    const { symbol, price, candles } = res.value;
+                    const rsi = calculateRSI(candles);
+                    const curPrice = parseFloat(price);
+                    
+                    // Filter Logika: Long jika RSI di bawah 45, Short jika di atas 55
+                    // (LBH LONGGAR AGAR DATA CEPAT MUNCUL)
+                    let signal = null;
+                    if (rsi < 45) signal = { type: 'LONG', color: '#10b981', bg: 'rgba(16, 185, 129, 0.1)' };
+                    else if (rsi > 55) signal = { type: 'SHORT', color: '#f43f5e', bg: 'rgba(244, 63, 94, 0.1)' };
 
-                if (rsi < 42) signal = { type: 'LONG', color: '#00ffcc' };
-                else if (rsi > 58) signal = { type: 'SHORT', color: '#ff3366' };
-
-                if (signal) {
-                    const card = document.createElement('div');
-                    card.className = `glass-card p-8 stagger-load shimmer`;
-                    card.style.animationDelay = `${index * 0.1}s`;
-                    card.innerHTML = `
-                        <div class="flex justify-between items-start mb-8">
-                            <div>
-                                <h2 class="text-2xl font-extrabold tracking-tighter">${item.symbol.split('USDT')[0]}<span class="text-zinc-600">/U</span></h2>
-                                <p class="mono text-sm opacity-40 mt-1">${price.toLocaleString()}</p>
+                    if (signal) {
+                        const card = document.createElement('div');
+                        card.className = 'glass-card p-6 stagger';
+                        card.style.animationDelay = `${i * 0.05}s`;
+                        card.innerHTML = `
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <h2 class="text-xl font-bold tracking-tight">${symbol.replace('USDT','')}</h2>
+                                    <p class="mono text-xs text-zinc-500 mt-1">$${curPrice.toLocaleString()}</p>
+                                </div>
+                                <span style="color: ${signal.color}; background: ${signal.bg}" class="text-[9px] font-black px-2 py-1 rounded uppercase tracking-widest border border-current opacity-80">
+                                    ${signal.type}
+                                </span>
                             </div>
-                            <div class="text-right">
-                                <span style="color: ${signal.color}" class="text-[10px] font-black tracking-[0.3em] uppercase">${signal.type}</span>
-                                <div class="mt-2 h-1 w-full bg-zinc-800 rounded-full overflow-hidden">
-                                    <div class="h-full" style="width: ${rsi}%; background: ${signal.color}"></div>
+
+                            <div class="space-y-3 font-mono text-[11px]">
+                                <div class="flex justify-between border-b border-white/5 pb-2">
+                                    <span class="text-zinc-600 uppercase">Entry</span>
+                                    <span class="text-white">${signal.type === 'LONG' ? (curPrice * 0.999).toFixed(5) : (curPrice * 1.001).toFixed(5)}</span>
+                                </div>
+                                <div class="flex justify-between border-b border-white/5 pb-2">
+                                    <span class="text-zinc-600 uppercase text-emerald-500">Take Profit</span>
+                                    <span class="text-emerald-400 font-bold">${signal.type === 'LONG' ? (curPrice * 1.03).toFixed(5) : (curPrice * 0.97).toFixed(5)}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-zinc-600 uppercase text-rose-500 font-bold">Stop Loss</span>
+                                    <span class="text-rose-500">${signal.type === 'LONG' ? (curPrice * 0.985).toFixed(5) : (curPrice * 1.015).toFixed(5)}</span>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="space-y-4 font-mono">
-                            <div class="flex justify-between text-[10px]">
-                                <span class="text-zinc-500 uppercase">Entry_Point</span>
-                                <span class="font-bold">${signal.type === 'LONG' ? (price * 0.999).toFixed(5) : (price * 1.001).toFixed(5)}</span>
+                            <div class="mt-6 flex items-center justify-between">
+                                <span class="text-[9px] text-zinc-600 font-bold uppercase tracking-widest">RSI Strength</span>
+                                <span class="text-[10px] mono text-white">${rsi.toFixed(1)}</span>
                             </div>
-                            <div class="flex justify-between text-[10px]">
-                                <span class="text-zinc-500 uppercase">Take_Profit</span>
-                                <span class="text-emerald-400 font-bold">${signal.type === 'LONG' ? (price * 1.03).toFixed(5) : (price * 0.97).toFixed(5)}</span>
+                            <div class="w-full h-1 bg-zinc-900 rounded-full mt-2 overflow-hidden">
+                                <div class="h-full" style="width: ${rsi}%; background: ${signal.color}"></div>
                             </div>
-                            <div class="flex justify-between text-[10px]">
-                                <span class="text-zinc-500 uppercase">Stop_Loss</span>
-                                <span class="text-rose-500 font-bold">${signal.type === 'LONG' ? (price * 0.985).toFixed(4) : (price * 1.015).toFixed(4)}</span>
-                            </div>
-                        </div>
-                    `;
-                    grid.appendChild(card);
+                        `;
+                        grid.appendChild(card);
+                    }
                 }
             });
         }
 
-        // Clock
+        // Timer
         setInterval(() => {
             document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-GB');
         }, 1000);
 
-        init();
-        setInterval(init, 60000);
+        // Run Engine
+        startEngine();
+        setInterval(startEngine, 60000); // Auto update tiap 1 menit
     </script>
 </body>
 </html>
